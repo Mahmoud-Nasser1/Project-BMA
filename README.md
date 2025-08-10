@@ -56,5 +56,5 @@ The project is built with a **3-layer architecture**:
 2. Open the project in IntelliJ IDEA or Eclipse.
 3. Download and add the SQLite JDBC Driver (sqlite-jdbc.jar) to the project classpath.
 4. Download and add JavaFX SDK (all JAR files from the lib folder) to the project classpath.
-5. Configure VM Options:--module-path "path\to\javafx-sdk\lib" --add-modules javafx.controls,javafx.fxml  
+5. Configure VM Options:--module-path "path\to\javafx-sdk\lib" --add-modules javafx.controls,javafx.fxml.  
 
