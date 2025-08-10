@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="650.0" prefWidth="1024.0" style="-fx-background-color:transparent;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking.mapController">
+
+    <left>
+        <AnchorPane prefHeight="418.0" prefWidth="220.0" style="-fx-background-color: rgba(50, 50, 50, 0.2); -fx-background-radius: 15px; -fx-padding: 30px;" styleClass="Sidebar" BorderPane.alignment="CENTER">
+            <children>
+                <VBox layoutX="14.0" prefHeight="519.0" prefWidth="214.0" spacing="20.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="homeIcon" fill="WHITE" glyphName="HOME" size="24" />
+                            <Label fx:id="homeLabel" onMouseClicked="#ToHome2" text="Home" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="userIcon" fill="WHITE" glyphName="USER" size="24" />
+                            <Label fx:id="userLabel" onMouseClicked="#ToAccount" text="Accounts" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="moneyIcon" fill="WHITE" glyphName="MONEY" size="24" />
+                            <Label fx:id="moneyLabel" text="DepositeWithDraw" textFill="WHITE" onMouseClicked="#ToDepositeWithDraw">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="227.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="exchangeIcon" fill="WHITE" glyphName="EXCHANGE" size="24" />
+                            <Label fx:id="exchangeLabel" onMouseClicked="#ToPayment" prefHeight="26.0" prefWidth="195.0" text="Payments Transfers" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <Separator prefWidth="200.0">
+                            <VBox.margin>
+                                <Insets left="5.0" right="5.0" />
+                            </VBox.margin>
+                        </Separator>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="chartIcon" fill="WHITE" glyphName="LINE_CHART" size="24" />
+                            <Label fx:id="chartLabel" onMouseClicked="#ToDashBoard" text="Dashboard" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="mapIcon" fill="WHITE" glyphName="MAP" size="24" />
+                            <Label fx:id="mapLabel" onMouseClicked="#ToFindUs" text="Find Us" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <Separator prefWidth="200.0">
+                            <VBox.margin>
+                                <Insets left="5.0" right="5.0" />
+                            </VBox.margin>
+                        </Separator>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="commentIcon" fill="WHITE" glyphName="COMMENT" size="24" />
+                            <Label fx:id="commentLabel" onMouseClicked="#ToChat" text="Chat" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="cogIcon" fill="WHITE" glyphName="COG" size="24" />
+                            <Label fx:id="cogLabel" onMouseClicked="#ToSettings" text="Settings" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="helpIcon" fill="WHITE" glyphName="QUESTION_CIRCLE" size="24" />
+                            <Label fx:id="helpLabel" onMouseClicked="#ToHelp" text="Help" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets left="5.0" top="10.0" />
+                    </padding>
+                </VBox>
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="15.0" left="15.0" />
+            </BorderPane.margin>
+        </AnchorPane>
+    </left>
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 20;-fx-background-color: rgba(50, 50, 50, 0.2); -fx-background-radius: 15px;">
+            <HBox prefHeight="46.0" prefWidth="206.0">
+                <children>
+                    <FontAwesomeIconView fill="WHITE" glyphName="BANK" size="20" text="" wrappingWidth="13.257135391235352">
+                        <HBox.margin>
+                            <Insets left="5.0" top="9.0" />
+                        </HBox.margin>
+                    </FontAwesomeIconView>
+                    <Label prefHeight="35.0" prefWidth="75.0" text="BMA" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="24.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="15.0" />
+                        </HBox.margin>
+                    </Label>
+                </children>
+            </HBox>
+            <Label fx:id="AccountUser" prefHeight="27.0" prefWidth="252.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" textFill="WHITE">
+                <graphic>
+                    <Label fx:id="MapUser" textFill="WHITE">
+                        <graphic>
+                            <Label text="Welcome," textFill="WHITE" />
+                        </graphic>
+                    </Label>
+                </graphic>
+            </Label>
+            <Region fx:id="spacer" HBox.hgrow="ALWAYS" />
+            <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: rgba(255,255,255,0.1); -fx-background-radius: 25; -fx-padding: 5 15; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 25;">
+                <FontAwesomeIconView fx:id="searchIcon" fill="WHITE" glyphName="SEARCH" glyphSize="16" />
+                <TextField focusTraversable="false" promptText="Search" style="-fx-background-color: transparent; -fx-text-fill: white;" />
+            </HBox>
+            <FontAwesomeIconView fx:id="bellIcon" fill="WHITE" glyphName="BELL" glyphSize="18" />
+            <ImageView fx:id="HomeImage" fitHeight="42.0" fitWidth="65.0" />
+            <BorderPane.margin>
+                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            </BorderPane.margin>
+        </HBox>
+    </top>
+
+    <center>
+
+        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" style="-fx-padding: 20; -fx-background-color: transparent;" BorderPane.alignment="CENTER">
+            <children>
+                <StackPane fx:id="mapContainer" style="-fx-background-color: rgba(50, 50, 50, 0.2); -fx-border-radius: 15px; -fx-background-radius: 15px;">
+                    <Group fx:id="mapGroup" StackPane.alignment="CENTER">
+                        <ImageView fx:id="worldMap" fitWidth="600.0" layoutX="7.0" layoutY="7.0" opacity="0.3" preserveRatio="true" />
+                        <Pane fx:id="pinContainer" prefHeight="400.0" prefWidth="600.0" style="-fx-border-radius: 15px; -fx-background-radius: 15px;" />
+                    </Group>
+                    <VBox alignment="TOP_RIGHT" spacing="5.0" style="-fx-padding: 10; -fx-background-radius: 15px; -fx-border-radius: 15px;" StackPane.alignment="TOP_RIGHT">
+                        <Button fx:id="zoomInBtn" style="-fx-background-radius: 50%; -fx-background-color: rgba(0,123,255,0.7); -fx-text-fill: white; -fx-font-size: 18px; -fx-pref-width: 40px; -fx-pref-height: 40px;" text="+" />
+                        <Button fx:id="zoomOutBtn" style="-fx-background-radius: 50%; -fx-background-color: rgba(220,53,69,0.7); -fx-text-fill: white; -fx-font-size: 18px; -fx-pref-width: 40px; -fx-pref-height: 40px;" text="-" />
+                    </VBox>
+                </StackPane>
+                <VBox fx:id="iconList" prefHeight="400.0" prefWidth="180.0" spacing="10.0" style="-fx-background-color: rgba(50, 50, 50, 0.2); -fx-background-radius: 15px; -fx-padding: 10;" HBox.hgrow="ALWAYS">
+                    <children>
+
+                        <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: rgba(255,255,255,0.1); -fx-padding: 10; -fx-background-radius: 15px; -fx-border-radius: 15px;">
+                            <VBox spacing="2">
+                                <Label style="-fx-font-size: 20px; -fx-text-fill: white; -fx-font-weight: bold;" text="Bank Branches" />
+                                <Separator prefWidth="140" style="-fx-background-color: rgba(255,255,255,0.4);" />
+                            </VBox>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: rgba(255,255,255,0.1); -fx-padding: 10; -fx-background-radius: 15px; -fx-border-radius: 15px;" styleClass="country">
+                            <ImageView fitHeight="25.0" fitWidth="40.0">
+                                <image>
+                                    <Image url="@/russia.png" />
+                                </image>
+                            </ImageView>
+                            <VBox spacing="2">
+                                <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="BMA" />
+                                <Label style="-fx-text-fill: white; -fx-font-size: 12px;" text="RUSSIA" />
+                            </VBox>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <HBox spacing="8">
+                                <FontAwesomeIconView  styleClass="branch-icon" style="-fx-cursor: hand;" userData="BMA,Russia,Moscow - Central Bank St. 1"  fill="WHITE" glyphName="LIST" size="20" />
+                                <FontAwesomeIconView fill="WHITE" glyphName="UNIVERSITY" size="20" />
+                            </HBox>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: rgba(255,255,255,0.1); -fx-padding: 10; -fx-background-radius: 15px; -fx-border-radius: 15px;" styleClass="country">
+                            <ImageView fitHeight="25.0" fitWidth="40.0">
+                                <image>
+                                    <Image url="@/egypt.png" />
+                                </image>
+                            </ImageView>
+                            <VBox spacing="2">
+                                <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="BMA" />
+                                <Label style="-fx-text-fill: white; -fx-font-size: 12px;" text="EGYPT" />
+                            </VBox>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <HBox spacing="8">
+                                <FontAwesomeIconView  userData="BMA,Egypt,Cairo - Tahrir Street" styleClass="branch-icon" style="-fx-cursor: hand;"  fill="WHITE" glyphName="LIST" size="20" />
+                                <FontAwesomeIconView fill="WHITE" glyphName="UNIVERSITY" size="20" />
+                            </HBox>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: rgba(255,255,255,0.1); -fx-padding: 10; -fx-background-radius: 15px; -fx-border-radius: 15px;" styleClass="country">
+                            <ImageView fitHeight="25.0" fitWidth="40.0">
+                                <image>
+                                    <Image url="@/brazil.png" />
+                                </image>
+                            </ImageView>
+                            <VBox spacing="2">
+                                <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="BMA" />
+                                <Label style="-fx-text-fill: white; -fx-font-size: 12px;" text="BRAZIL" />
+                            </VBox>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <HBox spacing="8">
+                                <FontAwesomeIconView  userData="BMA,Brazil,Rio de Janeiro - Copacabana Ave." styleClass="branch-icon" style="-fx-cursor: hand;"  fill="WHITE" glyphName="LIST" size="20" />
+                                <FontAwesomeIconView fill="WHITE" glyphName="UNIVERSITY" size="20" />
+                            </HBox>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: rgba(255,255,255,0.1); -fx-padding: 10; -fx-background-radius: 15px; -fx-border-radius: 15px;" styleClass="country">
+                            <ImageView fitHeight="25.0" fitWidth="40.0">
+                                <image>
+                                    <Image url="@/algeria.png" />
+                                </image>
+                            </ImageView>
+                            <VBox spacing="2">
+                                <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="BMA" />
+                                <Label style="-fx-text-fill: white; -fx-font-size: 12px;" text="ALGERIA" />
+                            </VBox>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <HBox spacing="8">
+                                <FontAwesomeIconView  userData="BMA,Algeria,Algiers - Martyrs Square"  styleClass="branch-icon" style="-fx-cursor: hand;"  fill="WHITE" glyphName="LIST" size="20" />
+                                <FontAwesomeIconView fill="WHITE" glyphName="UNIVERSITY" size="20" />
+                            </HBox>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: rgba(255,255,255,0.1); -fx-padding: 10; -fx-background-radius: 15px; -fx-border-radius: 15px;" styleClass="country">
+                            <ImageView fitHeight="25.0" fitWidth="40.0">
+                                <image>
+                                    <Image url="@/spain.png" />
+                                </image>
+                            </ImageView>
+                            <VBox spacing="2">
+                                <Label style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="BMA" />
+                                <Label style="-fx-text-fill: white; -fx-font-size: 12px;" text="SPAIN" />
+                            </VBox>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <HBox spacing="8">
+                                <FontAwesomeIconView userData="BMA,Spain,Madrid - Plaza Mayor 7" styleClass="branch-icon" style="-fx-cursor: hand;"  fill="WHITE" glyphName="LIST" size="20" />
+                                <FontAwesomeIconView fill="WHITE" glyphName="UNIVERSITY" size="20" />
+                            </HBox>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: rgba(255,255,255,0.1); -fx-padding: 10; -fx-background-radius: 15px; -fx-border-radius: 15px;" styleClass="country">
+                            <ImageView fitHeight="25.0" fitWidth="40.0">
+                                <image>
+                                    <Image url="@/usa.png" />
+                                </image>
+                            </ImageView>
+                            <VBox spacing="2">
+                                <Label style="-fx-text-fill: white;-fx-font-size: 16px; -fx-font-weight: bold;" text="BMA" />
+                                <Label style="-fx-text-fill: white; -fx-font-size: 12px;" text="USA" />
+                            </VBox>
+                            <Region HBox.hgrow="ALWAYS" />
+                            <HBox spacing="8">
+                                <FontAwesomeIconView userData="BMA,USA,New York - Wall Street 10" styleClass="branch-icon" style="-fx-cursor: hand;"  fill="WHITE" glyphName="LIST" size="20" />
+                                <FontAwesomeIconView fill="WHITE" glyphName="UNIVERSITY" size="20" />
+                            </HBox>
+                        </HBox>
+
+                    </children>
+                </VBox>
+
+            </children>
+        </HBox>
+
+    </center>
+
+
+</BorderPane>

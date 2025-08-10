@@ -1,0 +1,262 @@
+@startuml Complete Banking System Class Diagram
+
+skinparam class {
+    BackgroundColor LightBlue
+    ArrowColor Blue
+    BorderColor DarkBlue
+}
+
+' Core User Management
+class User {
+    -username: String
+    -password: String
+    -fullName: String
+    -email: String
+    -mobile: String
+    -nationalId: String
+    -profileImage: String
+    -totalBalance: double
+    -isVerified: boolean
+    +login(): boolean
+    +register(): boolean
+    +updateProfile(): boolean
+    +changePassword(): boolean
+}
+
+class Account {
+    -userId: int
+    -balance: double
+    -lastLogin: DateTime
+    +getBalance(): double
+    +updateBalance(): boolean
+    +getTransactionHistory(): List<Transaction>
+    +getAccountDetails(): UserDetails
+}
+
+' Transaction System
+abstract class Transaction {
+    #id: int
+    #userId: int
+    #amount: double
+    #date: DateTime
+    #type: TransactionType
+    +recordTransaction(): boolean
+    +getTransactionDetails(): String
+    +{abstract} validateTransaction(): boolean
+}
+
+class DepositTransaction extends Transaction {
+    -fees: double
+    +validateTransaction(): boolean
+    +calculateFees(): double
+}
+
+class WithdrawalTransaction extends Transaction {
+    -atmId: String
+    +validateTransaction(): boolean
+    +checkWithdrawalLimit(): boolean
+}
+
+class TransferTransaction extends Transaction {
+    -recipientId: int
+    -transferType: String
+    +validateTransaction(): boolean
+    +checkTransferLimit(): boolean
+}
+
+' Payment System
+abstract class Payment {
+    #id: int
+    #userId: int
+    #amount: double
+    #date: DateTime
+    #status: String
+    +processPayment(): boolean
+    +validateAmount(): boolean
+    +getPaymentDetails(): String
+    +{abstract} calculateFees(): double
+}
+
+class BillPayment extends Payment {
+    -billType: String
+    -customerId: String
+    +calculateFees(): double
+    +validateBillInfo(): boolean
+}
+
+class MobileTopUp extends Payment {
+    -network: String
+    -mobileNumber: String
+    +calculateFees(): double
+    +validateMobileNumber(): boolean
+}
+
+class InsurancePayment extends Payment {
+    -provider: String
+    -policyNumber: String
+    +calculateFees(): double
+    +validatePolicy(): boolean
+}
+
+class EducationPayment extends Payment {
+    -institution: String
+    -studentId: String
+    +calculateFees(): double
+    +validateStudent(): boolean
+}
+
+class GovernmentPayment extends Payment {
+    -serviceType: String
+    -serviceNumber: String
+    +calculateFees(): double
+    +validateService(): boolean
+}
+
+' Controllers
+class LoginController {
+    +handleLogin(): void
+    +handleLogout(): void
+    +validateCredentials(): boolean
+}
+
+class TransactionController {
+    +processDeposit(): boolean
+    +processWithdrawal(): boolean
+    +processTransfer(): boolean
+    +getTransactionHistory(): List<Transaction>
+}
+
+class PaymentController {
+    +processBillPayment(): boolean
+    +processMobileTopUp(): boolean
+    +processInsurance(): boolean
+    +processEducationPayment(): boolean
+}
+
+' Processors
+class PaymentProcessor {
+    +processBillPayment(): boolean
+    +processMobileTopUp(): boolean
+    +processInsurance(): boolean
+    +processEducation(): boolean
+    +processGovernment(): boolean
+}
+
+class TransactionProcessor {
+    +processDeposit(): boolean
+    +processWithdrawal(): boolean
+    +processTransfer(): boolean
+    +validateBalance(): boolean
+}
+
+' Utility Classes
+class SecurityManager {
+    -SALT_LENGTH: int
+    -ITERATIONS: int
+    -KEY_LENGTH: int
+    +hashPassword(): String
+    +verifyPassword(): boolean
+    +generateSalt(): String
+    +generateVerificationCode(): String
+}
+
+class EmailVerifier {
+    -CODE_LENGTH: int
+    +sendVerificationEmail(): boolean
+    +verifyCode(): boolean
+    +sendNotification(): boolean
+}
+
+class DatabaseConnection {
+    -DB_URL: String
+    +{static} getConnection(): Connection
+    +{static} closeConnection(): void
+}
+
+class FeeCalculator {
+    +{static} calculateDepositFee(): double
+    +{static} calculateTransferFee(): double
+    +{static} calculateServiceFee(): double
+}
+
+' Enums
+enum TransactionType {
+    DEPOSIT
+    WITHDRAWAL
+    TRANSFER
+    PAYMENT
+    REFUND
+}
+
+enum PaymentType {
+    BILL
+    MOBILE_TOPUP
+    INSURANCE
+    EDUCATION
+    GOVERNMENT
+}
+
+enum PaymentStatus {
+    PENDING
+    PROCESSING
+    COMPLETED
+    FAILED
+    REVERSED
+}
+
+' Core Relationships
+User "1" *-- "1" Account
+Account "1" *-- "*" Transaction
+Account "1" *-- "*" Payment
+
+' Controller Relationships
+LoginController --> User
+TransactionController --> Account
+PaymentController --> Payment
+
+' Processor Relationships
+PaymentProcessor --> Payment
+TransactionProcessor --> Transaction
+
+' Security and Utility Relationships
+User --> SecurityManager
+EmailVerifier --> User
+Transaction --> DatabaseConnection
+Payment --> DatabaseConnection
+Payment --> FeeCalculator
+Transaction --> FeeCalculator
+
+' Enum Relationships
+Transaction --> TransactionType
+Payment --> PaymentType
+Payment --> PaymentStatus
+
+' Notes
+note right of SecurityManager
+  Handles all security:
+  - Password hashing
+  - Salt generation
+  - Verification codes
+end note
+
+note right of DatabaseConnection
+  Central database access:
+  - Connection pooling
+  - Transaction management
+end note
+
+note right of FeeCalculator
+  Calculates fees for:
+  - Transactions
+  - Payments
+  - Services
+end note
+
+note right of User
+  Core user management:
+  - Authentication
+  - Profile handling
+  - Account linking
+end note
+
+@enduml 

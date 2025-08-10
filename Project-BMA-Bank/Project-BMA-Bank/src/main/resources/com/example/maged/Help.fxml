@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane style="-fx-background-color: transparent;" styleClass="root" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking.HelpController">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20; -fx-background-color: rgba(50, 50, 50, 0.2); -fx-background-radius: 15px;">
+            <HBox prefHeight="46.0" prefWidth="206.0">
+                <children>
+                    <FontAwesomeIconView fx:id="bankIcon" fill="WHITE" glyphName="BANK" size="20">
+                        <HBox.margin>
+                            <Insets left="5.0" top="9.0" />
+                        </HBox.margin>
+                    </FontAwesomeIconView>
+                    <Label text="BMA" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="24.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="15.0" />
+                        </HBox.margin>
+                    </Label>
+                </children>
+            </HBox>
+            <Label fx:id="AccountUser6" prefHeight="27.0" prefWidth="243.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" textFill="WHITE">
+                <graphic>
+                    <Label text="Welcome, " textFill="WHITE" />
+                </graphic>
+            </Label>
+            <Region fx:id="spacer" HBox.hgrow="ALWAYS" />
+            <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: rgba(255,255,255,0.1); -fx-background-radius: 25; -fx-padding: 5 15; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 25;">
+                <FontAwesomeIconView fx:id="searchIcon" fill="WHITE" glyphName="SEARCH" size="16" />
+                <TextField fx:id="searchField" focusTraversable="false" promptText="Search" style="-fx-background-color: transparent; -fx-border-color: transparent;" />
+            </HBox>
+            <FontAwesomeIconView fx:id="bellIcon" fill="WHITE" glyphName="BELL" size="18" />
+            <ImageView fx:id="HomeImage" fitHeight="42.0" fitWidth="65.0" />
+            <BorderPane.margin>
+                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            </BorderPane.margin>
+        </HBox>
+    </top>
+
+    <left>
+        <AnchorPane prefHeight="418.0" prefWidth="220.0" style="-fx-background-color: rgba(50, 50, 50, 0.2); -fx-background-radius: 15px; -fx-padding: 30px;" styleClass="Sidebar" BorderPane.alignment="CENTER">
+            <children>
+                <VBox layoutX="14.0" prefHeight="519.0" prefWidth="214.0" spacing="20.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="homeIcon" fill="WHITE" glyphName="HOME" size="24" />
+                            <Label fx:id="homeLabel" onMouseClicked="#ToHome2" text="Home" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="userIcon" fill="WHITE" glyphName="USER" size="24" />
+                            <Label fx:id="userLabel" onMouseClicked="#ToAccount" text="Accounts" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="moneyIcon" fill="WHITE" glyphName="MONEY" size="24" />
+                            <Label fx:id="moneyLabel" onMouseClicked="#ToDepositeWithDraw" prefHeight="26.0" prefWidth="160.0" text="DepositWithDraw" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="227.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="exchangeIcon" fill="WHITE" glyphName="EXCHANGE" size="24" />
+                            <Label fx:id="exchangeLabel" onMouseClicked="#ToPayment" prefHeight="26.0" prefWidth="195.0" text="Payments Transfers" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <Separator prefWidth="200.0">
+                            <VBox.margin>
+                                <Insets left="5.0" right="15.0" />
+                            </VBox.margin>
+                        </Separator>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="chartIcon" fill="WHITE" glyphName="LINE_CHART" size="24" />
+                            <Label fx:id="chartLabel" onMouseClicked="#ToDashBoard" text="Dashboard" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="mapIcon" fill="WHITE" glyphName="MAP" size="24" />
+                            <Label fx:id="mapLabel" onMouseClicked="#ToFindUs" text="Find Us" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <Separator prefWidth="175.0">
+                            <VBox.margin>
+                                <Insets left="5.0" right="15.0" />
+                            </VBox.margin>
+                        </Separator>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="commentIcon" fill="WHITE" glyphName="COMMENT" size="24" />
+                            <Label fx:id="commentLabel" onMouseClicked="#ToChat" text="Chat" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="16.0" />
+                                </font>
+                                <HBox.margin>
+                                    <Insets />
+                                </HBox.margin>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="cogIcon" fill="WHITE" glyphName="COG" size="24" />
+                            <Label fx:id="cogLabel" onMouseClicked="#ToSettings" text="Settings" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="helpIcon" fill="WHITE" glyphName="QUESTION_CIRCLE" size="24" />
+                            <Label fx:id="helpLabel" onMouseClicked="#ToHelp" text="Help" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets left="5.0" top="10.0" />
+                    </padding>
+                </VBox>
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="15.0" left="15.0" />
+            </BorderPane.margin>
+        </AnchorPane>
+    </left>
+
+    <center>
+        <AnchorPane style="-fx-background-color: transparent; -fx-padding: 8px;">
+            <children>
+                <GridPane alignment="CENTER" hgap="30.0" vgap="90.0">
+                    <children>
+
+                        <VBox alignment="CENTER" prefHeight="260" prefWidth="360" spacing="14" style="-fx-background-color: rgba(50, 50, 50, 0.2); -fx-background-radius: 15px; -fx-padding: 20px;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <children>
+                                <FontAwesomeIconView fill="#008cff" glyphName="USER" size="40" />
+                                <Label style="-fx-font-size: 19px; -fx-font-weight: bold;" text="Manage Account" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="19.0" />
+                                    </font>
+                                </Label>
+                                <Label alignment="CENTER" style="-fx-font-size: 15px;" text="Update your profile, change passwords, and secure your account with two-factor authentication and other settings." textFill="WHITE" wrapText="true">
+                                    <font>
+                                        <Font name="System Regular" size="15.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                        <VBox alignment="CENTER" prefHeight="260" prefWidth="360" spacing="14" style="-fx-background-color: rgba(50, 50, 50, 0.2); -fx-background-radius: 15px; -fx-padding: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <children>
+                                <FontAwesomeIconView fill="#008cff" glyphName="MONEY" size="40" />
+                                <Label style="-fx-font-size: 19px; -fx-font-weight: bold;" text="Transactions" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="19.0" />
+                                    </font>
+                                </Label>
+                                <Label alignment="CENTER" style="-fx-font-size: 15px;" text="Guide on depositing, withdrawing, and transferring funds securely using our platform's tools and services." textFill="WHITE" wrapText="true">
+                                    <font>
+                                        <Font name="System Regular" size="15.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                        <VBox alignment="CENTER" prefHeight="260" prefWidth="360" spacing="14" style="-fx-background-color: rgba(50, 50, 50, 0.2); -fx-background-radius: 15px; -fx-padding: 20px;" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                            <children>
+                                <FontAwesomeIconView fill="#008cff" glyphName="COMMENT" size="40" />
+                                <Label style="-fx-font-size: 19px; -fx-font-weight: bold;" text="Contact Support" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="19.0" />
+                                    </font>
+                                </Label>
+                                <Label alignment="CENTER" style="-fx-font-size: 15px;" text="Reach out via chat, email, or phone for assistance with any issues, available 24/7 for your convenience." textFill="WHITE" wrapText="true">
+                                    <font>
+                                        <Font name="System Regular" size="15.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                        <VBox alignment="CENTER" prefHeight="260" prefWidth="360" spacing="14" style="-fx-background-color: rgba(50, 50, 50, 0.2); -fx-background-radius: 15px; -fx-padding: 20px;" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            <children>
+                                <FontAwesomeIconView fill="#008cff" glyphName="QUESTION_CIRCLE" size="40" />
+                                <Label style="-fx-font-size: 19px; -fx-font-weight: bold;" text="FAQs" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="19.0" />
+                                    </font>
+                                </Label>
+                                <Label alignment="CENTER" style="-fx-font-size: 15px;" text="Find answers to common questions about our services, features, and how to troubleshoot issues." textFill="WHITE" wrapText="true">
+                                    <font>
+                                        <Font name="System Regular" size="15.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                        <VBox alignment="CENTER" prefHeight="260" prefWidth="360" spacing="14" style="-fx-background-color: rgba(50, 50, 50, 0.2); -fx-background-radius: 15px; -fx-padding: 20px;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <children>
+                                <FontAwesomeIconView fill="#008cff" glyphName="SHIELD" size="40" />
+                                <Label style="-fx-font-size: 19px; -fx-font-weight: bold;" text="Security Tips" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="19.0" />
+                                    </font>
+                                </Label>
+                                <Label alignment="CENTER" style="-fx-font-size: 15px;" text="Learn best practices to protect your account from unauthorized access and ensure safe banking." textFill="WHITE" wrapText="true">
+                                    <font>
+                                        <Font name="System Regular" size="15.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                        <VBox alignment="CENTER" prefHeight="260" prefWidth="360" spacing="14" style="-fx-background-color: rgba(50, 50, 50, 0.2); -fx-background-radius: 15px; -fx-padding: 20px;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                            <children>
+                                <FontAwesomeIconView fill="#008cff" glyphName="MOBILE" size="40" />
+                                <Label style="-fx-font-size: 19px; -fx-font-weight: bold;" text="Mobile Banking" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="19.0" />
+                                    </font>
+                                </Label>
+                                <Label alignment="CENTER" style="-fx-font-size: 15px;" text="Use our mobile app for convenient banking on the go, with secure access to all features." textFill="WHITE" wrapText="true">
+                                    <font>
+                                        <Font name="System Regular" size="15.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="8" left="8" right="8" top="8" />
+                    </padding>
+               <columnConstraints>
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+                </GridPane>
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+            </BorderPane.margin>
+        </AnchorPane>
+    </center>
+</BorderPane>

@@ -1,0 +1,79 @@
+@startuml Authentication Sequence
+
+skinparam sequence {
+    ParticipantBackgroundColor LightBlue
+    ActorBackgroundColor LightGreen
+    DatabaseBackgroundColor LightYellow
+}
+
+actor User
+participant "LoginController" as Login
+participant "SecurityManager" as Security
+participant "EmailVerifier" as Email
+database "Database" as DB
+
+== Login Process ==
+User -> Login: login(username, password)
+activate Login
+Login -> Security: verifyCredentials(username, password)
+activate Security
+Security -> DB: getUserPasswordAndSalt(username)
+DB --> Security: return hashedPassword, salt
+Security -> Security: verifyPassword(password, salt)
+Security --> Login: authenticationResult
+deactivate Security
+Login --> User: loginSuccess/Failure
+deactivate Login
+
+== Registration Process ==
+User -> Login: register(userDetails)
+activate Login
+Login -> Security: validateInput(userDetails)
+Security --> Login: validationResult
+
+Login -> Security: hashPassword(password)
+activate Security
+Security -> Security: generateSalt()
+Security -> Security: applyPBKDF2Hash()
+Security --> Login: hashedPassword
+deactivate Security
+
+Login -> DB: createUser(userDetails)
+DB --> Login: userId
+
+Login -> Email: sendVerificationEmail(email)
+activate Email
+Email -> Security: generateVerificationCode()
+Email -> DB: storeVerificationCode()
+Email -> Email: sendEmail()
+Email --> Login: emailSent
+deactivate Email
+
+Login --> User: registrationSuccess
+deactivate Login
+
+== Password Reset ==
+User -> Login: resetPassword(email)
+activate Login
+Login -> Email: initiatePasswordReset(email)
+activate Email
+Email -> Security: generateResetCode()
+Email -> DB: storeResetCode()
+Email -> Email: sendResetEmail()
+Email --> Login: resetEmailSent
+deactivate Email
+Login --> User: checkEmail
+
+User -> Login: submitResetCode(code, newPassword)
+Login -> Security: verifyResetCode(code)
+activate Security
+Security -> DB: checkResetCode()
+DB --> Security: isValid
+Security -> Security: hashNewPassword()
+Security -> DB: updatePassword()
+Security --> Login: resetSuccess
+deactivate Security
+Login --> User: passwordUpdated
+deactivate Login
+
+@enduml 

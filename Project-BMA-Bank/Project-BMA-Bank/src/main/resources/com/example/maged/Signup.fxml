@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane style="-fx-background-color: transparent;" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking.SignupController">
+    <center>
+        <HBox alignment="CENTER" prefHeight="600.0" prefWidth="900.0" spacing="20">
+         <Region prefHeight="600.0" prefWidth="497.0" />
+            <VBox alignment="CENTER" maxHeight="600.0" maxWidth="566.0" minHeight="500.0" minWidth="400.0" prefHeight="600.0" prefWidth="559.0" spacing="10" style="-fx-background-color: rgba(0, 0, 0, 0.3); -fx-background-radius: 15px; -fx-padding: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0); -fx-border-color: rgba(0, 191, 255, 0.7); -fx-border-width: 1; -fx-border-radius: 15px;">
+                <children>
+                    <HBox alignment="CENTER" prefHeight="50.0" spacing="10" style="-fx-background-color: transparent;">
+                        <children>
+                            <FontAwesomeIconView fill="#00ddff" glyphName="USER_PLUS" size="24" text="" />
+                            <Label text="Create Account" textFill="#ffffff">
+                                <font>
+                                    <Font name="System Bold" size="24.0" />
+                                </font>
+                                <effect>
+                                    <Glow level="0.4" />
+                                </effect>
+                            </Label>
+                            <ImageView fx:id="imageView" fitHeight="59.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #00c3ff; -fx-border-width: 2; -fx-background-color: rgba(0,0,0,0.25);">
+                                <HBox.margin>
+                                    <Insets left="20.0" />
+                                </HBox.margin>
+                            </ImageView>
+                        </children>
+                        <VBox.margin>
+                            <Insets bottom="10.0" />
+                        </VBox.margin>
+                    </HBox>
+
+                    <HBox alignment="CENTER" prefHeight="40.0" spacing="10">
+                        <children>
+                            <HBox alignment="CENTER" prefHeight="40.0" spacing="5" style="-fx-background-color: transparent; -fx-background-radius: 10px; -fx-padding: 5 10;">
+                                <children>
+                                    <FontAwesomeIconView fill="#00ddff" glyphName="USER" size="20" />
+                                    <TextField fx:id="nameField" prefHeight="30.0" promptText="Full Name" style="-fx-font-size: 14px; -fx-background-radius: 10; -fx-background-color: rgba(0,0,0,0.25); -fx-border-color: #00ddff; -fx-border-width: 1; -fx-border-radius: 10px; -fx-text-fill: #ffffff; -fx-prompt-text-fill: rgba(255,255,255,0.7); -fx-padding: 5 10;" HBox.hgrow="ALWAYS">
+                              <HBox.margin>
+                                 <Insets left="5.0" />
+                              </HBox.margin></TextField>
+                                </children>
+                            </HBox>
+                            <HBox alignment="CENTER" prefHeight="40.0" spacing="5" style="-fx-background-color: transparent; -fx-background-radius: 10px; -fx-padding: 5 10;">
+                                <children>
+                                    <FontAwesomeIconView fill="#00ddff" glyphName="ENVELOPE" size="20" text="" />
+                                    <TextField fx:id="emailField" prefHeight="30.0" promptText="Email" style="-fx-font-size: 14px; -fx-background-color: rgba(0,0,0,0.25); -fx-background-radius: 10; -fx-border-color: #00ddff; -fx-border-width: 1; -fx-border-radius: 10px; -fx-text-fill: #ffffff; -fx-prompt-text-fill: rgba(255,255,255,0.7); -fx-padding: 5 10;" HBox.hgrow="ALWAYS">
+                              <HBox.margin>
+                                 <Insets left="5.0" />
+                              </HBox.margin></TextField>
+                                </children>
+                            </HBox>
+                        </children>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="20.0" spacing="10">
+                        <children>
+                            <Label fx:id="nameError" alignment="CENTER" prefHeight="20.0" prefWidth="250.0" style="-fx-text-fill: white; -fx-font-size: 10px; -fx-font-weight: bold;" text="">
+                        <font>
+                           <Font size="13.0" />
+                        </font>
+                        <HBox.margin>
+                           <Insets left="15.0" />
+                        </HBox.margin></Label>
+                            <Label fx:id="emailError" alignment="CENTER" prefHeight="20.0" prefWidth="250.0" style="-fx-text-fill: white; -fx-font-size: 10px; -fx-font-weight: bold;" text="">
+                        <font>
+                           <Font size="33.0" />
+                        </font>
+                        <HBox.margin>
+                           <Insets right="5.0" />
+                        </HBox.margin></Label>
+                        </children>
+                        <VBox.margin>
+                            <Insets bottom="5.0" />
+                        </VBox.margin>
+                    </HBox>
+
+                    <HBox alignment="CENTER" prefHeight="40.0" spacing="10">
+                        <children>
+                            <HBox alignment="CENTER" prefHeight="40.0" spacing="5" style="-fx-background-color: transparent; -fx-background-radius: 10px; -fx-padding: 5 10;">
+                                <children>
+                                    <FontAwesomeIconView fill="#00ddff" glyphName="PHONE" size="20" text="" />
+                                    <TextField fx:id="mobileField" prefHeight="30.0" promptText="Mobile" style="-fx-font-size: 14px; -fx-background-radius: 10; -fx-background-color: rgba(0,0,0,0.25); -fx-border-radius: 10px; -fx-border-color: #00ddff; -fx-border-width: 1; -fx-text-fill: #ffffff; -fx-prompt-text-fill: rgba(255,255,255,0.7); -fx-padding: 5 10;" HBox.hgrow="ALWAYS">
+                              <HBox.margin>
+                                 <Insets left="5.0" />
+                              </HBox.margin></TextField>
+                                </children>
+                            </HBox>
+                            <HBox alignment="CENTER" prefHeight="40.0" spacing="5" style="-fx-background-color: transparent; -fx-background-radius: 10px; -fx-padding: 5 10;">
+                                <children>
+                                    <FontAwesomeIconView fill="#00ddff" glyphName="ID_CARD" size="20" text="" />
+                                    <TextField fx:id="nationalIdField" prefHeight="30.0" promptText="National ID" style="-fx-font-size: 14px; -fx-border-radius: 10px; -fx-background-radius: 10; -fx-background-color: rgba(0,0,0,0.25); -fx-border-color: #00ddff; -fx-border-width: 1; -fx-text-fill: #ffffff; -fx-prompt-text-fill: rgba(255,255,255,0.7); -fx-padding: 5 10;" HBox.hgrow="ALWAYS">
+                              <HBox.margin>
+                                 <Insets left="5.0" />
+                              </HBox.margin></TextField>
+                                </children>
+                            </HBox>
+                        </children>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="20.0" spacing="10">
+                        <children>
+                            <Label fx:id="mobileError" alignment="CENTER" prefHeight="20.0" prefWidth="250.0" style="-fx-text-fill: white; -fx-font-size: 10px; -fx-font-weight: bold;" text="  ">
+                        <font>
+                           <Font size="13.0" />
+                        </font>
+                        <HBox.margin>
+                           <Insets left="15.0" />
+                        </HBox.margin></Label>
+                            <Label fx:id="nationalIdError" alignment="CENTER" prefHeight="20.0" prefWidth="250.0" style="-fx-text-fill: white; -fx-font-size: 10px; -fx-font-weight: bold;" text="">
+                        <font>
+                           <Font size="13.0" />
+                        </font></Label>
+                        </children>
+                        <VBox.margin>
+                            <Insets bottom="5.0" />
+                        </VBox.margin>
+                    </HBox>
+
+                    <HBox alignment="CENTER" prefHeight="40.0" spacing="10">
+                        <children>
+                            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="220.0" spacing="5" style="-fx-background-color: transparent; -fx-background-radius: 10px; -fx-padding: 5 10;">
+                                <children>
+                                    <FontAwesomeIconView fill="#00ddff" glyphName="CALENDAR" size="20" text="" />
+                                    <DatePicker fx:id="dobPicker" prefHeight="30.0" style="-fx-font-size: 14px; -fx-border-radius: 10px; -fx-background-radius: 10; -fx-background-color: rgba(0,0,0,0.25); -fx-border-color: #00ddff; -fx-border-width: 1; -fx-text-fill: #ffffff; -fx-prompt-text-fill: rgba(255,255,255,0.7); -fx-padding: 5 10;" HBox.hgrow="ALWAYS">
+                              <HBox.margin>
+                                 <Insets left="5.0" />
+                              </HBox.margin>
+                           </DatePicker>
+                                </children>
+                        <HBox.margin>
+                           <Insets right="5.0" />
+                        </HBox.margin>
+                            </HBox>
+                            <HBox alignment="CENTER" prefHeight="40.0" spacing="5" style="-fx-background-color: transparent; -fx-background-radius: 10px; -fx-padding: 5 10;">
+                                <children>
+                                    <FontAwesomeIconView fill="#00ddff" glyphName="USER" size="20" text="" />
+                                    <TextField fx:id="usernameField" prefHeight="30.0" promptText="Username" style="-fx-font-size: 14px; -fx-border-radius: 10px; -fx-background-radius: 10; -fx-background-color: rgba(0,0,0,0.25); -fx-border-color: #00ddff; -fx-border-width: 1; -fx-text-fill: #ffffff; -fx-prompt-text-fill: rgba(255,255,255,0.7); -fx-padding: 5 10;" HBox.hgrow="ALWAYS">
+                              <HBox.margin>
+                                 <Insets left="5.0" />
+                              </HBox.margin></TextField>
+                                </children>
+                            </HBox>
+                        </children>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="20.0" spacing="10">
+                        <children>
+                            <Label fx:id="dobError" alignment="CENTER" prefHeight="20.0" prefWidth="250.0" style="-fx-text-fill: white; -fx-font-size: 10px; -fx-font-weight: bold;" text="">
+                        <font>
+                           <Font size="13.0" />
+                        </font>
+                        <HBox.margin>
+                           <Insets left="10.0" />
+                        </HBox.margin></Label>
+                            <Label fx:id="usernameError" alignment="CENTER" prefHeight="20.0" prefWidth="250.0" style="-fx-text-fill: white; -fx-font-size: 10px; -fx-font-weight: bold;" text="">
+                        <font>
+                           <Font size="13.0" />
+                        </font></Label>
+                        </children>
+                        <VBox.margin>
+                            <Insets bottom="5.0" />
+                        </VBox.margin>
+                    </HBox>
+
+                    <HBox alignment="CENTER" prefHeight="40.0" spacing="10">
+                        <children>
+                            <HBox alignment="CENTER" prefHeight="40.0" spacing="5" style="-fx-background-color: transparent; -fx-background-radius: 10px; -fx-padding: 5 10;">
+                                <children>
+                                    <FontAwesomeIconView fill="#00ddff" glyphName="LOCK" size="20" text="" />
+                                    <PasswordField fx:id="passwordField" prefHeight="30.0" promptText="Password" style="-fx-font-size: 14px; -fx-background-radius: 10; -fx-background-color: rgba(0,0,0,0.25); -fx-border-color: #00ddff; -fx-border-radius: 10px; -fx-border-width: 1; -fx-text-fill: #ffffff; -fx-prompt-text-fill: rgba(255,255,255,0.7); -fx-padding: 5 10;" HBox.hgrow="ALWAYS">
+                              <HBox.margin>
+                                 <Insets left="7.0" />
+                              </HBox.margin></PasswordField>
+                                </children>
+                            </HBox>
+                            <HBox alignment="CENTER" prefHeight="40.0" spacing="5" style="-fx-background-color: transparent; -fx-background-radius: 10px; -fx-padding: 5 10;">
+                                <children>
+                                    <FontAwesomeIconView fill="#00ddff" glyphName="IMAGE" size="20" text="" />
+                                    <TextField fx:id="imagePathField" prefHeight="30.0" promptText="Profile Image Path" style="-fx-font-size: 14px; -fx-border-radius: 10px; -fx-background-radius: 10; -fx-background-color: rgba(0,0,0,0.25); -fx-border-color: #00ddff; -fx-border-width: 1; -fx-text-fill: #ffffff; -fx-prompt-text-fill: rgba(255,255,255,0.7); -fx-padding: 5 10;" HBox.hgrow="ALWAYS">
+                              <HBox.margin>
+                                 <Insets left="5.0" />
+                              </HBox.margin></TextField>
+                                </children>
+                            </HBox>
+                        </children>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="20.0" spacing="10">
+                        <children>
+                            <Label fx:id="passwordError" alignment="CENTER" prefHeight="20.0" prefWidth="250.0" style="-fx-text-fill: white; -fx-font-size: 10px; -fx-font-weight: bold;" text="">
+                        <font>
+                           <Font size="13.0" />
+                        </font>
+                        <HBox.margin>
+                           <Insets left="15.0" />
+                        </HBox.margin></Label>
+                            <Label fx:id="imagePathError" alignment="CENTER" prefHeight="20.0" prefWidth="250.0" style="-fx-text-fill: white; -fx-font-size: 10px; -fx-font-weight: bold;" text="">
+                        <font>
+                           <Font size="13.0" />
+                        </font></Label>
+                        </children>
+                        <VBox.margin>
+                            <Insets bottom="5.0" />
+                        </VBox.margin>
+                    </HBox>
+
+                    <HBox alignment="CENTER" prefHeight="40.0" spacing="5" style="-fx-background-color: transparent; -fx-background-radius: 10px; -fx-padding: 5 10;">
+                        <children>
+                            <FontAwesomeIconView fill="#00ddff" glyphName="MONEY" size="20" text="" />
+                            <TextField fx:id="tb" prefHeight="30.0" promptText="Initial Balance" style="-fx-font-size: 14px; -fx-border-radius: 10px; -fx-background-radius: 10; -fx-background-color: rgba(0,0,0,0.25); -fx-border-color: #00ddff; -fx-border-width: 1; -fx-text-fill: #ffffff; -fx-prompt-text-fill: rgba(255,255,255,0.7); -fx-padding: 5 10;" HBox.hgrow="ALWAYS">
+                        <HBox.margin>
+                           <Insets left="5.0" />
+                        </HBox.margin></TextField>
+                        </children>
+                    </HBox>
+                    <Label fx:id="tbError" alignment="CENTER" prefHeight="20.0" style="-fx-text-fill: white; -fx-font-size: 10px; -fx-font-weight: bold;" text="">
+                        <VBox.margin>
+                            <Insets bottom="10.0" />
+                        </VBox.margin>
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+                    </Label>
+
+                    <HBox alignment="CENTER" prefHeight="40.0" spacing="15">
+                        <children>
+                            <Button fx:id="signupButton" onAction="#handleSignup" prefHeight="34.0" prefWidth="153.0" style="-fx-background-color: linear-gradient(to bottom, #00a2ff, #0066cc); -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,140,255,0.8), 5, 0, 0, 0);" styleClass="loginbutton" stylesheets="@Login.css" text="Sign Up">
+                                <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="USER_PLUS" size="16" />
+                                </graphic>
+                            </Button>
+                            <Button onAction="#switchToLogin" prefHeight="34.0" prefWidth="162.0" style="-fx-background-color: linear-gradient(to bottom, #00a2ff, #0066cc); -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0,140,255,0.8), 5, 0, 0, 0);" styleClass="loginbutton" stylesheets="@Login.css" text="Back to Login">
+                                <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="SIGN_IN" size="16" />
+                                </graphic>
+                            </Button>
+                        </children>
+                        <VBox.margin>
+                            <Insets bottom="10.0" top="10.0" />
+                        </VBox.margin>
+                    </HBox>
+                </children>
+                <HBox.margin>
+                    <Insets left="15.0" right="15.0" />
+                </HBox.margin>
+            </VBox>
+
+            <VBox maxHeight="600.0" maxWidth="450.0" minHeight="500.0" minWidth="0.0" prefHeight="600.0" prefWidth="450.0" style="-fx-background-image: url('https://example.com/signup-bg.jpg'); -fx-background-size: cover; -fx-background-position: center; -fx-background-radius: 15px;" />
+        </HBox>
+    </center>
+</BorderPane>

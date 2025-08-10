@@ -1,0 +1,107 @@
+@startuml Payment Sequence
+
+skinparam sequence {
+    ParticipantBackgroundColor LightBlue
+    ActorBackgroundColor LightGreen
+    DatabaseBackgroundColor LightYellow
+}
+
+actor User
+participant "PaymentController" as PC
+participant "PaymentProcessor" as PP
+participant "FeeCalculator" as Fee
+participant "SecurityManager" as Security
+database "Database" as DB
+participant "EmailNotifier" as Email
+
+== Bill Payment ==
+User -> PC: initiateBillPayment(billType, amount)
+activate PC
+PC -> Security: validateUser()
+Security --> PC: userValid
+
+PC -> Fee: calculateBillPaymentFee(amount)
+Fee --> PC: feeAmount
+
+PC -> PP: processBillPayment(billType, amount, fee)
+activate PP
+PP -> DB: checkBalance()
+DB --> PP: sufficientFunds
+PP -> DB: updateBalance(-amount-fee)
+DB --> PP: balanceUpdated
+PP -> DB: recordBillPayment()
+DB --> PP: paymentRecorded
+PP --> PC: paymentComplete
+deactivate PP
+
+PC -> Email: sendBillPaymentConfirmation()
+PC --> User: billPaymentSuccess
+deactivate PC
+
+== Mobile Top-up ==
+User -> PC: initiateMobileTopUp(network, number, amount)
+activate PC
+PC -> Security: validateUser()
+Security --> PC: userValid
+
+PC -> PP: processMobileTopUp(network, number, amount)
+activate PP
+PP -> DB: checkBalance()
+DB --> PP: sufficientFunds
+PP -> DB: updateBalance(-amount)
+DB --> PP: balanceUpdated
+PP -> DB: recordTopUp()
+DB --> PP: topUpRecorded
+PP --> PC: topUpComplete
+deactivate PP
+
+PC -> Email: sendTopUpConfirmation()
+PC --> User: topUpSuccess
+deactivate PC
+
+== Education Payment ==
+User -> PC: initiateEducationPayment(institution, studentId, amount)
+activate PC
+PC -> Security: validateUser()
+Security --> PC: userValid
+
+PC -> Fee: calculateEducationFee(amount)
+Fee --> PC: feeAmount
+
+PC -> PP: processEducationPayment(institution, studentId, amount, fee)
+activate PP
+PP -> DB: checkBalance()
+DB --> PP: sufficientFunds
+PP -> DB: updateBalance(-amount-fee)
+DB --> PP: balanceUpdated
+PP -> DB: recordEducationPayment()
+DB --> PP: paymentRecorded
+PP --> PC: paymentComplete
+deactivate PP
+
+PC -> Email: sendEducationPaymentConfirmation()
+PC --> User: educationPaymentSuccess
+deactivate PC
+
+== Insurance Payment ==
+User -> PC: initiateInsurancePayment(provider, policy, amount)
+activate PC
+PC -> Security: validateUser()
+Security --> PC: userValid
+
+PC -> PP: processInsurancePayment(provider, policy, amount)
+activate PP
+PP -> DB: checkBalance()
+DB --> PP: sufficientFunds
+PP -> DB: updateBalance(-amount)
+DB --> PP: balanceUpdated
+PP -> DB: recordInsurancePayment()
+DB --> PP: paymentRecorded
+PP --> PC: paymentComplete
+deactivate PP
+
+PC -> Email: sendInsuranceConfirmation()
+PC --> User: insurancePaymentSuccess
+deactivate PC
+
+@enduml 

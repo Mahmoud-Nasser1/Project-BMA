@@ -1,0 +1,172 @@
+@startuml Banking System Class Diagram
+
+skinparam class {
+    BackgroundColor LightBlue
+    ArrowColor Blue
+    BorderColor DarkBlue
+}
+
+' Main Classes
+class User {
+    -username: String
+    -password: String
+    -fullName: String
+    -email: String
+    -mobile: String
+    -nationalId: String
+    -profileImage: String
+    -totalBalance: double
+    -isVerified: boolean
+    +login(): boolean
+    +register(): boolean
+    +updateProfile(): boolean
+    +changePassword(): boolean
+}
+
+class Account {
+    -userId: int
+    -balance: double
+    -lastLogin: DateTime
+    +getBalance(): double
+    +updateBalance(): boolean
+    +getTransactionHistory(): List<Transaction>
+    +getAccountDetails(): UserDetails
+}
+
+class Transaction {
+    -id: int
+    -userId: int
+    -type: String
+    -amount: double
+    -date: DateTime
+    +getTransactionDetails(): String
+    +recordTransaction(): boolean
+}
+
+class Transfer {
+    -id: int
+    -fromUser: String
+    -toUser: String
+    -amount: double
+    -status: String
+    -date: DateTime
+    +processTransfer(): boolean
+    +getTransferDetails(): String
+}
+
+class Payment {
+    -id: int
+    -userId: int
+    -type: String
+    -amount: double
+    -status: String
+    -date: DateTime
+    +processPayment(): boolean
+    +getPaymentDetails(): String
+}
+
+class DatabaseConnection {
+    -DB_URL: String
+    +{static} getConnection(): Connection
+    +{static} closeConnection(): void
+}
+
+class SecurityManager {
+    -SALT_LENGTH: int
+    -ITERATIONS: int
+    -KEY_LENGTH: int
+    +hashPassword(): String
+    +verifyPassword(): boolean
+    +generateSalt(): String
+    +generateVerificationCode(): String
+}
+
+class EmailVerifier {
+    -CODE_LENGTH: int
+    +sendVerificationEmail(): boolean
+    +verifyCode(): boolean
+    +sendNotification(): boolean
+}
+
+' Controllers
+class LoginController {
+    +handleLogin(): void
+    +handleLogout(): void
+    +validateCredentials(): boolean
+}
+
+class TransactionController {
+    +processDeposit(): boolean
+    +processWithdrawal(): boolean
+    +processTransfer(): boolean
+    +getTransactionHistory(): List<Transaction>
+}
+
+class PaymentController {
+    +processBillPayment(): boolean
+    +processMobileTopUp(): boolean
+    +processInsurance(): boolean
+    +processEducationPayment(): boolean
+}
+
+' Relationships
+User "1" *-- "1" Account
+Account "1" *-- "*" Transaction
+Account "1" *-- "*" Transfer
+Account "1" *-- "*" Payment
+
+LoginController --> User
+TransactionController --> Account
+PaymentController --> Payment
+
+Transaction --> DatabaseConnection
+Transfer --> DatabaseConnection
+Payment --> DatabaseConnection
+
+User --> SecurityManager
+EmailVerifier --> User
+
+' Enums and Types
+enum TransactionType {
+    DEPOSIT
+    WITHDRAW
+    TRANSFER
+    PAYMENT
+}
+
+enum PaymentType {
+    BILL
+    MOBILE_TOPUP
+    INSURANCE
+    EDUCATION
+    GOVERNMENT
+}
+
+enum TransactionStatus {
+    PENDING
+    COMPLETED
+    FAILED
+}
+
+Transaction --> TransactionType
+Payment --> PaymentType
+Transfer --> TransactionStatus
+
+note right of SecurityManager
+  Handles all security operations:
+  - Password hashing
+  - Salt generation
+  - Verification
+end note
+
+note right of DatabaseConnection
+  Manages database connections
+  and provides connection pool
+end note
+
+note right of User
+  Core user entity with
+  all user-related operations
+end note
+
+@enduml 

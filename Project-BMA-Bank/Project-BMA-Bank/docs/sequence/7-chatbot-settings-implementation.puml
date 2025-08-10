@@ -1,0 +1,92 @@
+@startuml Chatbot and Settings Implementation
+
+skinparam sequence {
+    ParticipantBackgroundColor LightBlue
+    ActorBackgroundColor LightGreen
+    DatabaseBackgroundColor LightYellow
+}
+
+actor User
+participant "ChatBotController" as CBC
+participant "OpenAIChatbot" as OAI
+participant "SettingsController" as SC
+participant "UserSession" as US
+database "database_BankSystem" as DB
+
+== ChatBot Initialization ==
+User -> CBC: open chat
+activate CBC
+CBC -> US: getInstance()
+US --> CBC: session
+CBC -> US: getUsername()
+US --> CBC: currentUsername
+CBC -> DB: getUserDetails(username)
+DB --> CBC: userDetails
+CBC -> CBC: initialize UI components
+CBC --> User: display chat interface
+deactivate CBC
+
+== Chat Interaction ==
+User -> CBC: handleAskChatbot(question)
+activate CBC
+CBC -> OAI: getChatResponse(question)
+activate OAI
+OAI -> OAI: prepare API request
+OAI -> "OpenAI API": send request
+"OpenAI API" --> OAI: response
+OAI --> CBC: chatResponse
+deactivate OAI
+CBC -> CBC: addMessageToChat()
+CBC --> User: display response
+deactivate CBC
+
+== Settings Initialization ==
+User -> SC: open settings
+activate SC
+SC -> US: getInstance()
+US --> SC: session
+SC -> US: getUsername()
+US --> SC: currentUsername
+SC -> DB: getUserDetails(username)
+DB --> SC: userDetails
+SC -> SC: loadUserData()
+SC --> User: display settings
+deactivate SC
+
+== Profile Settings ==
+User -> SC: enableEditing()
+activate SC
+SC -> SC: enable form fields
+SC --> User: editable form
+
+User -> SC: changeProfileImage()
+SC -> SC: open file chooser
+SC -> DB: updateProfileImage(path)
+DB --> SC: success
+SC --> User: updated image
+
+User -> SC: saveChanges()
+SC -> DB: updateUserDetails()
+DB --> SC: success
+SC -> SC: disable form fields
+SC --> User: saved confirmation
+deactivate SC
+
+== Theme Settings ==
+User -> SC: toggleTheme()
+activate SC
+SC -> SC: switch theme
+SC -> DB: saveThemePreference()
+DB --> SC: saved
+SC --> User: updated theme
+deactivate SC
+
+== Logout Process ==
+User -> SC: handleLogout()
+activate SC
+SC -> US: clearSession()
+SC -> SC: navigate to login
+SC --> User: logout complete
+deactivate SC
+
+@enduml 

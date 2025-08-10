@@ -1,0 +1,50 @@
+@startuml Transactions and Payments Use Cases
+
+skinparam actorStyle awesome
+skinparam usecase {
+  BackgroundColor LightYellow
+  BorderColor Orange
+  ArrowColor Orange
+}
+
+title "Transactions and Payments"
+
+actor "Customer" as customer
+actor "Bank Staff" as staff
+
+rectangle "Transactions & Payments" {
+  usecase "View Transaction History" as UC6
+  usecase "Make Payments" as UC13
+  usecase "View Analytics" as UC19
+  usecase "Generate Reports" as UC9
+  usecase "Monitor Activities" as UC20
+}
+
+customer --> UC6
+customer --> UC13
+customer --> UC19
+
+staff --> UC9
+staff --> UC20
+
+UC13 ..> UC6 : <<include>>
+UC19 ..> UC6 : <<include>>
+UC20 ..> UC9 : <<include>>
+
+note right of UC6
+  Transaction history
+  available for all
+  financial operations
+end note
+
+legend right
+  **Transactions & Payments**
+  ====
+  - Transaction History
+  - Payment Processing
+  - Analytics
+  - Reporting
+  - Activity Monitoring
+endlegend
+
+@enduml 

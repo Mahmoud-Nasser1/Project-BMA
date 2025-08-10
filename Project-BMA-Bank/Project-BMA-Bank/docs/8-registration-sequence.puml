@@ -1,0 +1,86 @@
+@startuml Registration Process Sequence
+
+skinparam sequence {
+    ParticipantBackgroundColor LightBlue
+    ActorBackgroundColor LightGreen
+    DatabaseBackgroundColor LightYellow
+    ArrowColor Blue
+}
+
+actor User
+participant "Registration\nForm" as Form
+participant "Validation\nHandler" as Validator
+participant "Security\nManager" as Security
+participant "Email\nVerifier" as EmailVerif
+database "Database" as DB
+participant "Email\nSystem" as Email
+
+== Initial Registration ==
+User -> Form: Submit Registration
+Form -> Validator: Validate Input
+Validator -> Security: Check Username Availability
+Security -> DB: Query Username
+DB --> Security: Username Status
+Security --> Validator: Availability Result
+
+alt Username Available
+    Validator -> Security: Hash Password
+    Security -> Security: Generate Salt
+    Security -> Security: Apply PBKDF2 Hash
+    Validator -> DB: Store User Data
+    DB --> Validator: Confirmation
+    
+    == Email Verification ==
+    Validator -> EmailVerif: Request Verification
+    EmailVerif -> Security: Generate Verification Code
+    Security -> DB: Store Verification Code
+    EmailVerif -> Email: Send Verification Email
+    Email --> User: Verification Code
+    
+    == Account Activation ==
+    User -> Form: Submit Verification Code
+    Form -> EmailVerif: Verify Code
+    EmailVerif -> DB: Check Code
+    DB --> EmailVerif: Verification Status
+    
+    alt Code Valid
+        EmailVerif -> DB: Activate Account
+        DB --> EmailVerif: Activation Confirmation
+        EmailVerif --> Form: Account Activated
+        Form --> User: Welcome Message
+    else Invalid Code
+        EmailVerif --> Form: Invalid Code
+        Form --> User: Error Message
+    end
+    
+else Username Taken
+    Validator --> Form: Username Unavailable
+    Form --> User: Error Message
+end
+
+== Profile Setup ==
+User -> Form: Upload Profile Image
+Form -> Validator: Validate Image
+Validator -> DB: Store Image
+DB --> Validator: Confirmation
+
+User -> Form: Set Initial Balance
+Form -> Validator: Validate Amount
+Validator -> DB: Store Balance
+DB --> Validator: Confirmation
+
+note right of Security
+  Password Security:
+  - Salt generation
+  - PBKDF2 hashing
+  - Secure storage
+end note
+
+note right of EmailVerif
+  Verification:
+  - Code generation
+  - Email validation
+  - Account activation
+end note
+
+@enduml 

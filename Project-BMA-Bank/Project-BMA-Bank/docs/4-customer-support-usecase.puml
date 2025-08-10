@@ -1,0 +1,50 @@
+@startuml Customer Support Use Cases
+
+skinparam actorStyle awesome
+skinparam usecase {
+  BackgroundColor LightPink
+  BorderColor Red
+  ArrowColor Red
+}
+
+title "Customer Support Services"
+
+actor "Customer" as customer
+actor "Bank Staff" as staff
+actor "AI Chatbot" as chatbot
+
+rectangle "Customer Support" {
+  usecase "Access Help Center" as UC15
+  usecase "Chat with AI Assistant" as UC16
+  usecase "View Location Services" as UC17
+  usecase "Handle Support Tickets" as UC21
+}
+
+customer --> UC15
+customer --> UC16
+customer --> UC17
+
+staff --> UC21
+
+chatbot --> UC16
+chatbot --> UC15
+
+UC16 ..> UC15 : <<extend>>
+UC21 ..> UC15 : <<include>>
+
+note right of UC15
+  Help Center provides
+  24/7 support through
+  multiple channels
+end note
+
+legend right
+  **Customer Support**
+  ====
+  - Help Center Access
+  - AI Chat Assistance
+  - Location Services
+  - Support Management
+endlegend
+
+@enduml 

@@ -1,0 +1,57 @@
+@startuml ClassDiagram
+
+' Class Diagram
+title Banking System - Class Diagram
+
+class Account {
+  - accountNumber: String
+  - balance: double
+  - accountType: String
+  + deposit(amount: double)
+  + withdraw(amount: double)
+  + transfer(destination: Account, amount: double)
+}
+
+class DatabaseBankSystem {
+  - connection: Connection
+  + createAccount(account: Account)
+  + performTransaction(transaction: Transaction)
+  + getUserDetails(userId: String)
+}
+
+class UserSession {
+  - userId: String
+  - isLoggedIn: boolean
+  + login(credentials: Credentials)
+  + logout()
+}
+
+class LoginController {
+  - userSession: UserSession
+  - databaseSystem: DatabaseBankSystem
+  + handleLogin(username: String, password: String)
+}
+
+class HomeController {
+  - userSession: UserSession
+  + displayDashboard()
+}
+
+class TransferController {
+  - databaseSystem: DatabaseBankSystem
+  + initiateTransfer(sourceAccount: String, destinationAccount: String, amount: double)
+}
+
+class PaymentController {
+  - databaseSystem: DatabaseBankSystem
+  + processPayment(paymentDetails: PaymentDetails)
+}
+
+Account --> DatabaseBankSystem
+LoginController --> UserSession
+LoginController --> DatabaseBankSystem
+HomeController --> UserSession
+TransferController --> DatabaseBankSystem
+PaymentController --> DatabaseBankSystem
+
+@enduml 

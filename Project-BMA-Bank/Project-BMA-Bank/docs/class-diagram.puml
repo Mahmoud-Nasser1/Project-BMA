@@ -1,0 +1,124 @@
+@startuml Banking System Class Diagram
+
+' Style configurations
+skinparam class {
+    BackgroundColor LightBlue
+    ArrowColor Blue
+    BorderColor DarkBlue
+}
+
+' Core Classes
+class UserSession {
+    - static instance: UserSession
+    - username: String
+    + getInstance(): UserSession
+    + getUsername(): String
+    + setUsername(String): void
+}
+
+class DatabaseConnection {
+    - DB_URL: String
+    + {static} getConnection(): Connection
+}
+
+class database_BankSystem {
+    - DB_URL: String
+    - SALT_LENGTH: int
+    - ITERATIONS: int
+    - KEY_LENGTH: int
+    - CODE_LENGTH: int
+    + createTables(): void
+    + getUserDetails(String): UserDetails
+    + getBalance(String): double
+    + getUserTransactions(String): List<Transaction>
+    + getMonthlyIncome(String, String): double
+    + getMonthlyExpenses(String, String): double
+}
+
+class Account {
+    - cardCount: int
+    - maxCards: int
+    - userSession: UserSession
+    + initialize(): void
+    + calculateMonthlyIncome(): double
+    + calculateMonthlyExpenses(): double
+    + updateIncomeExpenseLabels(): void
+    + updateTotalBalanceDisplay(): void
+}
+
+' Data Classes
+class UserDetails {
+    - fullName: String
+    - email: String
+    - mobile: String
+    - nationalId: String
+    - totalBalance: double
+    - profileImage: String
+    + getters()
+}
+
+class Transaction {
+    - id: int
+    - type: String
+    - amount: double
+    - date: String
+    + getters()
+    + toString(): String
+}
+
+class Transfer {
+    - id: int
+    - fromUser: String
+    - toUser: String
+    - amount: double
+    - status: String
+    - date: String
+    + getters()
+    + toString(): String
+}
+
+' Controllers
+class ChatBotController {
+    - userSession: UserSession
+    + initialize(): void
+    + handleChatInteractions(): void
+}
+
+class SettingsController {
+    - userSession: UserSession
+    + initialize(): void
+    + handleProfileUpdates(): void
+}
+
+class PaymentController {
+    - userSession: UserSession
+    + initialize(): void
+    + processPayment(): void
+}
+
+class DepositeWithDrawController {
+    - userSession: UserSession
+    + initialize(): void
+    + handleTransaction(): void
+}
+
+' Relationships
+UserSession "1" *-- "*" Account : uses
+database_BankSystem "1" *-- "*" UserDetails : manages
+database_BankSystem "1" *-- "*" Transaction : manages
+database_BankSystem "1" *-- "*" Transfer : manages
+DatabaseConnection -- database_BankSystem : provides connection
+
+Account --> UserSession : uses
+ChatBotController --> UserSession : uses
+SettingsController --> UserSession : uses
+PaymentController --> UserSession : uses
+DepositeWithDrawController --> UserSession : uses
+
+Account --> database_BankSystem : uses
+ChatBotController --> database_BankSystem : uses
+SettingsController --> database_BankSystem : uses
+PaymentController --> database_BankSystem : uses
+DepositeWithDrawController --> database_BankSystem : uses
+
+@enduml 

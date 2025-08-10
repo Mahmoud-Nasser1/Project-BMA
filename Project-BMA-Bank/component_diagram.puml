@@ -1,0 +1,21 @@
+@startuml ComponentDiagram
+
+' Component Diagram
+title Banking System - Component Diagram
+
+[Web Interface] as UI
+[Authentication Component] as Auth
+[Transaction Processing] as Trans
+[Account Management] as Acc
+[Database Layer] as DB
+[Payment Gateway] as Pay
+
+UI --> Auth
+UI --> Trans
+UI --> Acc
+Auth --> DB
+Trans --> DB
+Acc --> DB
+Trans --> Pay
+
+@enduml 

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane style="-fx-background-color: transparent;" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking.ChatBotController">
+    <left>
+        <AnchorPane prefHeight="418.0" prefWidth="220.0" style="-fx-background-color: rgba(50, 50, 50, 0.2); -fx-background-radius: 15px; -fx-padding: 30px;" styleClass="Sidebar" BorderPane.alignment="CENTER">
+            <children>
+                <VBox layoutX="14.0" prefHeight="519.0" prefWidth="214.0" spacing="20.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="homeIcon" fill="WHITE" glyphName="HOME" size="24" />
+                            <Label fx:id="homeLabel" onMouseClicked="#ToHome2" text="Home" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="userIcon" fill="WHITE" glyphName="USER" size="24" />
+                            <Label fx:id="userLabel" onMouseClicked="#ToAccount" text="Accounts" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="moneyIcon" fill="WHITE" glyphName="MONEY" size="24" />
+                            <Label fx:id="moneyLabel" onMouseClicked="#ToDepositeWithDraw" prefHeight="26.0" prefWidth="155.0" text="DepositWithDraw" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="227.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="exchangeIcon" fill="WHITE" glyphName="EXCHANGE" size="24" />
+                            <Label fx:id="exchangeLabel" onMouseClicked="#ToPayment" prefHeight="26.0" prefWidth="195.0" text="Payments Transfers" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <Separator prefWidth="200.0">
+                            <VBox.margin>
+                                <Insets left="5.0" right="15.0" />
+                            </VBox.margin>
+                        </Separator>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="chartIcon" fill="WHITE" glyphName="LINE_CHART" size="24" />
+                            <Label fx:id="chartLabel" onMouseClicked="#ToDashBoard" text="Dashboard" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="mapIcon" fill="WHITE" glyphName="MAP" size="24" />
+                            <Label fx:id="mapLabel" onMouseClicked="#ToFindUs" text="Find Us" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <Separator prefWidth="175.0">
+                            <VBox.margin>
+                                <Insets left="5.0" right="15.0" />
+                            </VBox.margin>
+                        </Separator>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="commentIcon" fill="WHITE" glyphName="COMMENT" size="24" />
+                            <Label fx:id="commentLabel" onMouseClicked="#ToChat" text="Chat" textFill="WHITE">
+                                <font>
+                                    <Font name="System Bold" size="16.0" />
+                                </font>
+                                <HBox.margin>
+                                    <Insets />
+                                </HBox.margin>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="cogIcon" fill="WHITE" glyphName="COG" size="24" />
+                            <Label fx:id="cogLabel" onMouseClicked="#ToSettings" text="Settings" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="213.0" spacing="12" styleClass="menu-item">
+                            <FontAwesomeIconView fx:id="helpIcon" fill="WHITE" glyphName="QUESTION_CIRCLE" size="24" />
+                            <Label fx:id="helpLabel" onMouseClicked="#ToHelp" text="Help" textFill="WHITE">
+                                <font>
+                                    <Font name="System Regular" size="16.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets left="5.0" top="10.0" />
+                    </padding>
+                </VBox>
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="15.0" left="15.0" />
+            </BorderPane.margin>
+        </AnchorPane>
+    </left>
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 20; -fx-background-color: rgba(50, 50, 50, 0.2); -fx-background-radius: 15px;">
+            <HBox prefHeight="46.0" prefWidth="206.0">
+                <children>
+                    <FontAwesomeIconView fill="WHITE" glyphName="BANK" size="20" text=" " wrappingWidth="13.257135391235352">
+                        <HBox.margin>
+                            <Insets left="5.0" top="9.0" />
+                        </HBox.margin>
+                    </FontAwesomeIconView>
+                    <Label prefHeight="35.0" prefWidth="75.0" text="BMA" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="24.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="15.0" />
+                        </HBox.margin>
+                    </Label>
+                </children>
+            </HBox>
+            <Label fx:id="AccountUser5" prefHeight="27.0" prefWidth="230.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" textFill="WHITE">
+                <graphic>
+                    <Label text="Welcome," textFill="WHITE" />
+                </graphic>
+            </Label>
+            <Region fx:id="spacer" HBox.hgrow="ALWAYS" />
+            <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-background-color: rgba(255,255,255,0.1); -fx-background-radius: 25; -fx-padding: 5 15; -fx-border-color: rgba(255,255,255,0.2); -fx-border-radius: 25;">
+                <FontAwesomeIconView fx:id="searchIcon" fill="WHITE" glyphName="SEARCH" glyphSize="16" />
+                <TextField focusTraversable="false" promptText="Search" style="-fx-background-color: transparent; -fx-border-color: transparent;" />
+            </HBox>
+            <FontAwesomeIconView fx:id="bellIcon" fill="WHITE" glyphName="BELL" glyphSize="18" />
+            <ImageView fx:id="HomeImage" fitHeight="42.0" fitWidth="65.0" />
+            <BorderPane.margin>
+                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            </BorderPane.margin>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: rgba(0, 0, 0, 0.15); -fx-background-radius: 20px; -fx-padding: 20px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 0);" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER" spacing="10" style="-fx-padding: 0 0 20 0;">
+                    <FontAwesomeIconView fill="#00a2ff" glyphName="COMMENT" size="28" />
+                    <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #ffffff;" text="Banking Assistant" />
+                </HBox>
+
+                <ScrollPane fx:id="chatScrollPane" fitToWidth="true" prefHeight="450.0" style="-fx-background: transparent; -fx-background-color: transparent;" styleClass="chat-scroll-pane">
+                    <content>
+                        <VBox fx:id="chatHistory" spacing="15" style="-fx-padding: 15; -fx-background-color: rgba(255, 255, 255, 0.05); -fx-background-radius: 15px;">
+
+                        </VBox>
+                    </content>
+                </ScrollPane>
+
+                <HBox alignment="CENTER" spacing="10" style="-fx-padding: 15 0 0 0;">
+                    <TextField fx:id="questionField" prefWidth="450.0" promptText="Ask about your banking services..." style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 25px; -fx-border-color: transparent; -fx-text-fill: #ffffff; -fx-prompt-text-fill: rgba(255,255,255,0.5); -fx-padding: 10 20; -fx-font-size: 14px;" styleClass="question-field" />
+                    <Button onAction="#handleAskChatbot" style="-fx-background-color: #00a2ff; -fx-background-radius: 25px; -fx-padding: 10 15; -fx-effect: dropshadow(gaussian, rgba(0,140,255,0.5), 8, 0, 0, 0);">
+                        <graphic>
+                            <FontAwesomeIconView fill="#ffffff" glyphName="PAPER_PLANE" size="16" />
+                        </graphic>
+                    </Button>
+                    <Button onAction="#clearChat" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 25px; -fx-padding: 10 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 0);">
+                        <graphic>
+                            <FontAwesomeIconView fill="#ff4d4d" glyphName="TRASH" size="16" />
+                        </graphic>
+                    </Button>
+                </HBox>
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+            </BorderPane.margin>
+        </VBox>
+    </center>
+</BorderPane>

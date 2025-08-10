@@ -1,0 +1,63 @@
+@startuml MainSequences
+
+' Main Sequence Diagrams Summary
+title Banking System - Main Sequences
+
+actor User
+participant LoginController
+participant TransferController
+participant PaymentController
+participant HomeController
+participant DatabaseBankSystem
+participant Account
+participant UserSession
+
+== Login Sequence ==
+User -> LoginController: Enter credentials
+LoginController -> DatabaseBankSystem: validateCredentials()
+DatabaseBankSystem --> LoginController: validation result
+alt successful login
+    LoginController -> UserSession: createSession()
+    LoginController --> User: Show dashboard
+else failed login
+    LoginController --> User: Show error message
+end
+
+== Home Dashboard Sequence ==
+User -> HomeController: Access dashboard
+HomeController -> UserSession: checkSession()
+HomeController -> DatabaseBankSystem: getUserAccounts()
+DatabaseBankSystem --> HomeController: accounts data
+HomeController --> User: Display dashboard
+
+== Transfer Money Sequence ==
+User -> TransferController: Initiate transfer
+TransferController -> DatabaseBankSystem: validateAccounts()
+DatabaseBankSystem --> TransferController: accounts valid
+TransferController -> Account: debit source account
+Account -> Account: credit destination account
+TransferController -> DatabaseBankSystem: updateBalances()
+TransferController --> User: Show confirmation
+
+== Payment Sequence ==
+User -> PaymentController: Initiate payment
+PaymentController -> DatabaseBankSystem: validateAccount()
+DatabaseBankSystem --> PaymentController: account valid
+PaymentController -> DatabaseBankSystem: processPayment()
+alt payment successful
+    DatabaseBankSystem --> PaymentController: payment confirmed
+    PaymentController --> User: Show success
+else payment failed
+    DatabaseBankSystem --> PaymentController: payment failed
+    PaymentController --> User: Show error
+end
+
+== Account Management Sequence ==
+User -> HomeController: Update account settings
+HomeController -> DatabaseBankSystem: validateRequest()
+DatabaseBankSystem --> HomeController: request valid
+HomeController -> DatabaseBankSystem: updateSettings()
+DatabaseBankSystem --> HomeController: settings updated
+HomeController --> User: Show confirmation
+
+@enduml 

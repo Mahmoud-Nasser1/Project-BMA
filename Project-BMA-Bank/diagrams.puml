@@ -1,0 +1,216 @@
+@startuml ClassDiagram
+
+' Class Diagram
+title Banking System - Class Diagram
+
+class Account {
+  - accountNumber: String
+  - balance: double
+  - accountType: String
+  + deposit(amount: double)
+  + withdraw(amount: double)
+  + transfer(destination: Account, amount: double)
+}
+
+class DatabaseBankSystem {
+  - connection: Connection
+  + createAccount(account: Account)
+  + performTransaction(transaction: Transaction)
+  + getUserDetails(userId: String)
+}
+
+class UserSession {
+  - userId: String
+  - isLoggedIn: boolean
+  + login(credentials: Credentials)
+  + logout()
+}
+
+class LoginController {
+  - userSession: UserSession
+  - databaseSystem: DatabaseBankSystem
+  + handleLogin(username: String, password: String)
+}
+
+class HomeController {
+  - userSession: UserSession
+  + displayDashboard()
+}
+
+class TransferController {
+  - databaseSystem: DatabaseBankSystem
+  + initiateTransfer(sourceAccount: String, destinationAccount: String, amount: double)
+}
+
+class PaymentController {
+  - databaseSystem: DatabaseBankSystem
+  + processPayment(paymentDetails: PaymentDetails)
+}
+
+Account --> DatabaseBankSystem
+LoginController --> UserSession
+LoginController --> DatabaseBankSystem
+HomeController --> UserSession
+TransferController --> DatabaseBankSystem
+PaymentController --> DatabaseBankSystem
+
+@enduml
+
+@startuml PackageDiagram
+
+' Package Diagram
+title Banking System - Package Structure
+
+package "com.banking" {
+  [Controllers]
+  [Models]
+  [Database]
+  [Utils]
+}
+
+package "com.example" {
+  [Configuration]
+}
+
+[Controllers] --> [Models]
+[Controllers] --> [Database]
+[Controllers] --> [Utils]
+[Models] --> [Database]
+
+@enduml
+
+@startuml LoginSequence
+
+' Login Sequence Diagram
+title Login Process - Sequence Diagram
+
+actor User
+participant LoginController
+participant DatabaseBankSystem
+participant UserSession
+
+User -> LoginController: Enter credentials
+LoginController -> DatabaseBankSystem: validateCredentials()
+DatabaseBankSystem --> LoginController: validation result
+alt successful login
+    LoginController -> UserSession: createSession()
+    LoginController --> User: Show dashboard
+else failed login
+    LoginController --> User: Show error message
+end
+
+@enduml
+
+@startuml TransferSequence
+
+' Transfer Sequence Diagram
+title Transfer Process - Sequence Diagram
+
+actor User
+participant TransferController
+participant DatabaseBankSystem
+participant Account
+
+User -> TransferController: Initiate transfer
+TransferController -> DatabaseBankSystem: validateAccounts()
+DatabaseBankSystem --> TransferController: accounts valid
+TransferController -> Account: debit source account
+Account -> Account: credit destination account
+TransferController -> DatabaseBankSystem: updateBalances()
+TransferController --> User: Show confirmation
+
+@enduml
+
+@startuml DatabaseSchema
+
+' Database Schema Diagram
+title Database Schema
+
+entity "Users" {
+  * user_id: varchar
+  --
+  * username: varchar
+  * password: varchar
+  * email: varchar
+  created_at: timestamp
+}
+
+entity "Accounts" {
+  * account_id: varchar
+  --
+  * user_id: varchar
+  * balance: decimal
+  * account_type: varchar
+  created_at: timestamp
+}
+
+entity "Transactions" {
+  * transaction_id: varchar
+  --
+  * source_account: varchar
+  * destination_account: varchar
+  * amount: decimal
+  * type: varchar
+  * timestamp: timestamp
+}
+
+Users ||--o{ Accounts
+Accounts ||--o{ Transactions
+
+@enduml
+
+@startuml ComponentDiagram
+
+' Component Diagram
+title Banking System - Component Diagram
+
+[Web Interface] as UI
+[Authentication Component] as Auth
+[Transaction Processing] as Trans
+[Account Management] as Acc
+[Database Layer] as DB
+[Payment Gateway] as Pay
+
+UI --> Auth
+UI --> Trans
+UI --> Acc
+Auth --> DB
+Trans --> DB
+Acc --> DB
+Trans --> Pay
+
+@enduml
+
+@startuml UseCaseDiagram
+
+' Use Case Diagram
+title Banking System - Use Cases
+
+actor "Customer" as user
+actor "Admin" as admin
+
+rectangle "Banking System" {
+  usecase "Login" as UC1
+  usecase "Transfer Money" as UC2
+  usecase "Make Payment" as UC3
+  usecase "View Balance" as UC4
+  usecase "Update Profile" as UC5
+  usecase "Manage Account" as UC6
+  usecase "View Transactions" as UC7
+  usecase "Customer Support" as UC8
+}
+
+user --> UC1
+user --> UC2
+user --> UC3
+user --> UC4
+user --> UC5
+user --> UC7
+user --> UC8
+
+admin --> UC1
+admin --> UC6
+admin --> UC7
+admin --> UC8
+
+@enduml 

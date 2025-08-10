@@ -1,0 +1,89 @@
+@startuml Transaction Sequence
+
+skinparam sequence {
+    ParticipantBackgroundColor LightBlue
+    ActorBackgroundColor LightGreen
+    DatabaseBackgroundColor LightYellow
+}
+
+actor User
+participant "TransactionController" as TC
+participant "TransactionProcessor" as TP
+participant "FeeCalculator" as Fee
+participant "SecurityManager" as Security
+database "Database" as DB
+participant "EmailNotifier" as Email
+
+== Deposit Process ==
+User -> TC: initiateDeposit(amount)
+activate TC
+TC -> Security: validateUser()
+Security --> TC: userValid
+
+TC -> Fee: calculateDepositFee(amount)
+Fee --> TC: feeAmount
+
+TC -> TP: processDeposit(amount, fee)
+activate TP
+TP -> DB: checkAccountStatus()
+DB --> TP: accountStatus
+TP -> DB: updateBalance(amount + fee)
+DB --> TP: updateSuccess
+TP -> DB: recordTransaction()
+DB --> TP: transactionRecorded
+TP --> TC: depositComplete
+deactivate TP
+
+TC -> Email: sendDepositConfirmation()
+TC --> User: depositSuccess
+deactivate TC
+
+== Withdrawal Process ==
+User -> TC: initiateWithdrawal(amount)
+activate TC
+TC -> Security: validateUser()
+Security --> TC: userValid
+
+TC -> TP: processWithdrawal(amount)
+activate TP
+TP -> DB: checkBalance()
+DB --> TP: sufficientFunds
+TP -> DB: updateBalance(-amount)
+DB --> TP: updateSuccess
+TP -> DB: recordTransaction()
+DB --> TP: transactionRecorded
+TP --> TC: withdrawalComplete
+deactivate TP
+
+TC -> Email: sendWithdrawalConfirmation()
+TC --> User: withdrawalSuccess
+deactivate TC
+
+== Transfer Process ==
+User -> TC: initiateTransfer(recipient, amount)
+activate TC
+TC -> Security: validateUsers(sender, recipient)
+Security --> TC: usersValid
+
+TC -> Fee: calculateTransferFee(amount)
+Fee --> TC: feeAmount
+
+TC -> TP: processTransfer(sender, recipient, amount, fee)
+activate TP
+TP -> DB: checkSenderBalance()
+DB --> TP: sufficientFunds
+TP -> DB: updateSenderBalance(-amount-fee)
+DB --> TP: senderUpdated
+TP -> DB: updateRecipientBalance(amount)
+DB --> TP: recipientUpdated
+TP -> DB: recordTransfer()
+DB --> TP: transferRecorded
+TP --> TC: transferComplete
+deactivate TP
+
+TC -> Email: sendTransferConfirmation(sender)
+TC -> Email: sendTransferNotification(recipient)
+TC --> User: transferSuccess
+deactivate TC
+
+@enduml 

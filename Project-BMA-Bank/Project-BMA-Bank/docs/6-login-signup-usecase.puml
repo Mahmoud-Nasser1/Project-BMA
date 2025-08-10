@@ -1,0 +1,101 @@
+@startuml Login and Registration Process
+
+skinparam actorStyle awesome
+skinparam usecase {
+  BackgroundColor LightCyan
+  BorderColor Blue
+  ArrowColor Blue
+}
+
+title "Login and Registration Process"
+
+actor "User" as user
+actor "Email System" as email
+actor "Database" as db
+
+rectangle "Authentication" {
+  usecase "Login" as UC1
+  usecase "Enter Username" as UC1_1
+  usecase "Enter Password" as UC1_2
+  usecase "Verify Credentials" as UC1_3
+  usecase "Access Dashboard" as UC1_4
+}
+
+rectangle "Registration" {
+  usecase "Sign Up" as UC2
+  usecase "Enter Personal Info" as UC2_1
+  usecase "Upload Profile Image" as UC2_2
+  usecase "Create Password" as UC2_3
+  usecase "Verify Email" as UC2_4
+  usecase "Set Initial Balance" as UC2_5
+}
+
+rectangle "Password Management" {
+  usecase "Reset Password" as UC3
+  usecase "Request Reset Code" as UC3_1
+  usecase "Verify Reset Code" as UC3_2
+  usecase "Set New Password" as UC3_3
+  usecase "Hash Password" as UC3_4
+}
+
+' Login Flow
+user --> UC1
+UC1 ..> UC1_1 : <<include>>
+UC1 ..> UC1_2 : <<include>>
+UC1_1 ..> UC1_3 : <<include>>
+UC1_2 ..> UC1_3 : <<include>>
+UC1_3 ..> UC1_4 : <<extend>>
+db --> UC1_3
+
+' Registration Flow
+user --> UC2
+UC2 ..> UC2_1 : <<include>>
+UC2 ..> UC2_2 : <<include>>
+UC2 ..> UC2_3 : <<include>>
+UC2 ..> UC2_4 : <<include>>
+UC2 ..> UC2_5 : <<include>>
+email --> UC2_4
+db --> UC2
+
+' Password Reset Flow
+user --> UC3
+UC3 ..> UC3_1 : <<include>>
+UC3_1 ..> UC3_2 : <<include>>
+UC3_2 ..> UC3_3 : <<include>>
+UC3_3 ..> UC3_4 : <<include>>
+email --> UC3_1
+db --> UC3_4
+
+note right of UC1_3
+  Credentials are verified using
+  hashed passwords and salt
+end note
+
+note right of UC2_4
+  Email verification required
+  before account activation
+end note
+
+note right of UC3_4
+  Passwords are securely hashed
+  using PBKDF2 algorithm
+end note
+
+legend right
+  **Authentication Process**
+  ====
+  Login:
+  - Username/Password verification
+  - Secure session creation
+  
+  Registration:
+  - Personal information collection
+  - Email verification
+  - Profile setup
+  
+  Password Reset:
+  - Email verification
+  - Secure password update
+endlegend
+
+@enduml 

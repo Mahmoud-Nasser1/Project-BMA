@@ -1,0 +1,83 @@
+@startuml Application Initialization Sequence
+
+skinparam sequence {
+    ParticipantBackgroundColor LightBlue
+    ActorBackgroundColor LightGreen
+    DatabaseBackgroundColor LightYellow
+}
+
+participant "Main" as Main
+participant "Application" as App
+participant "FXMLLoader" as Loader
+participant "database_BankSystem" as DB
+participant "Stage" as Stage
+participant "Scene" as Scene
+participant "StackPane" as Stack
+participant "ImageView" as ImgView
+participant "Region" as Region
+
+== Application Initialization ==
+[-> Main: main(args)
+activate Main
+Main -> App: launch(args)
+activate App
+
+== Database Setup ==
+App -> DB: createTables()
+activate DB
+DB --> App: tables created
+deactivate DB
+
+== UI Components Loading ==
+App -> Loader: new FXMLLoader()
+activate Loader
+Loader -> Loader: getResource("/com/example/maged/Home.fxml")
+Loader -> Loader: load()
+Loader --> App: rootNode
+deactivate Loader
+
+== Background Setup ==
+App -> ImgView: new ImageView(backgroundImage)
+activate ImgView
+ImgView -> ImgView: setFitWidth(screenWidth)
+ImgView -> ImgView: setFitHeight(screenHeight)
+ImgView -> ImgView: setPreserveRatio(false)
+ImgView -> ImgView: setEffect(new GaussianBlur(20))
+ImgView --> App: backgroundView
+deactivate ImgView
+
+== Overlay Setup ==
+App -> Region: new Region()
+activate Region
+Region -> Region: setBackground(blueOverlay)
+Region -> Region: setEffect(new GaussianBlur(20))
+Region -> Region: setPrefSize(screenWidth, screenHeight)
+Region --> App: blueOverlay
+deactivate Region
+
+== Scene Assembly ==
+App -> Stack: new StackPane()
+activate Stack
+Stack -> Stack: getChildren().addAll(backgroundView, blueOverlay, rootNode)
+Stack --> App: stackPane
+deactivate Stack
+
+App -> Scene: new Scene(stackPane, 1550, 840)
+activate Scene
+Scene -> Scene: getStylesheets().add(css)
+Scene --> App: scene
+deactivate Scene
+
+== Stage Configuration ==
+App -> Stage: setTitle("Bank")
+activate Stage
+App -> Stage: getIcons().add(bankIcon)
+App -> Stage: setScene(scene)
+App -> Stage: show()
+Stage --> App: stage shown
+deactivate Stage
+
+deactivate App
+deactivate Main
+
+@enduml 

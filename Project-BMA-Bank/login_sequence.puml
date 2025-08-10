@@ -1,0 +1,21 @@
+@startuml LoginSequence
+
+' Login Sequence Diagram
+title Login Process - Sequence Diagram
+
+actor User
+participant LoginController
+participant DatabaseBankSystem
+participant UserSession
+
+User -> LoginController: Enter credentials
+LoginController -> DatabaseBankSystem: validateCredentials()
+DatabaseBankSystem --> LoginController: validation result
+alt successful login
+    LoginController -> UserSession: createSession()
+    LoginController --> User: Show dashboard
+else failed login
+    LoginController --> User: Show error message
+end
+
+@enduml 

@@ -1,0 +1,437 @@
+/* Button hover effects for Payment.fxml */
+
+.button-with-hover:hover {
+    -fx-background-color: #0078e0;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 15, 0, 0, 0);
+}
+
+.button-with-hover:pressed {
+    -fx-background-color: #0060b0; /* Even darker blue when pressed */
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+
+.transparent-button-with-hover:hover {
+    -fx-background-color: rgba(0, 140, 255, 0.15);
+    -fx-text-fill: #0078e0;
+    -fx-cursor: hand;
+    -fx-background-radius: 5;
+    -fx-underline: true;
+}
+
+.transparent-button-with-hover:pressed {
+    -fx-background-color: rgba(0, 140, 255, 0.3);
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+/* Transition effects */
+.button-with-hover, .transparent-button-with-hover {
+    -fx-transition: -fx-background-color 0.3s, -fx-scale-x 0.2s, -fx-scale-y 0.2s, -fx-text-fill 0.3s;
+}
+
+
+.payment-button {
+    -fx-background-color: transparent;
+    -fx-effect: null;
+    -fx-transition: -fx-effect 0.3s;
+}
+
+.payment-button:hover {
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.7), 15, 0.7, 0, 0);
+    -fx-text-fill: #008cff;
+}
+
+/* ========== Transfer.fxml Styles ========== */
+
+/* Back button hover effect */
+.back-button {
+    -fx-transition: -fx-scale-x 0.2s, -fx-scale-y 0.2s, -fx-effect 0.3s, -fx-text-fill 0.3s;
+}
+
+.back-button:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.7), 10, 0.6, 0, 0);
+    -fx-text-fill: white;
+}
+
+/* Transfer button hover effect */
+.transfer-button {
+    -fx-transition: -fx-background-color 0.3s, -fx-scale-x 0.2s, -fx-scale-y 0.2s, -fx-effect 0.3s;
+}
+
+.transfer-button:hover {
+    -fx-background-color: #0078e0;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.8), 15, 0.7, 0, 0);
+}
+
+.transfer-button:pressed {
+    -fx-background-color: #0060b0;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+
+.transfer-textfield {
+    -fx-transition: -fx-border-color 0.3s, -fx-effect 0.3s, -fx-border-width 0.3s;
+}
+
+.transfer-textfield:hover {
+    -fx-cursor: text;
+    -fx-border-color: #00a0ff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.5), 8, 0.5, 0, 0);
+}
+
+.transfer-textfield:focused {
+    -fx-border-color: #00a0ff;
+    -fx-border-width: 2.5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.7), 10, 0.6, 0, 0);
+}
+
+
+.info-label {
+    -fx-transition: -fx-text-fill 0.3s, -fx-effect 0.3s;
+}
+
+.info-label:hover {
+    -fx-text-fill: #00a0ff;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.5), 5, 0.5, 0, 0);
+}
+
+/* Amount display label hover effect */
+.amount-label {
+    -fx-transition: -fx-border-color 0.3s, -fx-effect 0.3s;
+}
+
+.amount-label:hover {
+    -fx-border-color: #00a0ff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.5), 8, 0.5, 0, 0);
+}
+
+/* Hover effect for payment images */
+.payment-image {
+    -fx-effect: null;
+    -fx-transition: -fx-effect 0.3s, -fx-scale-x 0.2s, -fx-scale-y 0.2s;
+}
+
+.payment-image:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.7), 12, 0.7, 0, 0); /* External transparent blue aura */
+    -fx-cursor: hand;
+}
+
+/* Make sure buttons keep their transparent background when hovering */
+.transparent-button-with-hover.payment-button:hover {
+    -fx-background-color: transparent;
+    -fx-underline: false;
+}
+
+/* ========== PaymentPage.fxml Styles ========== */
+
+/* ComboBox hover effects */
+.payment-combobox {
+    -fx-transition: -fx-border-color 0.3s, -fx-effect 0.3s, -fx-border-width 0.3s;
+}
+
+.payment-combobox:hover {
+    -fx-cursor: hand;
+    -fx-border-color: #00a0ff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.5), 8, 0.5, 0, 0);
+}
+
+.payment-combobox:showing {
+    -fx-border-color: #00a0ff;
+    -fx-border-width: 2.5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.7), 10, 0.6, 0, 0);
+}
+
+
+.payment-combobox .list-cell:hover {
+    -fx-background-color: rgba(0, 140, 255, 0.2);
+    -fx-text-fill: white;
+}
+
+.payment-combobox .list-view {
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+    -fx-border-color: #008cff;
+    -fx-border-width: 1;
+}
+
+.payment-combobox .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-padding: 5;
+}
+
+/* Payment button hover effect */
+.pay-button {
+    -fx-transition: -fx-background-color 0.3s, -fx-scale-x 0.2s, -fx-scale-y 0.2s, -fx-effect 0.3s;
+}
+
+.pay-button:hover {
+    -fx-background-color: #0078e0;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.8), 15, 0.7, 0, 0);
+}
+
+.pay-button:pressed {
+    -fx-background-color: #0060b0;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+/* Category image hover effect */
+.category-image {
+    -fx-transition: -fx-effect 0.3s, -fx-opacity 0.3s;
+}
+
+.category-image:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.7), 10, 0.6, 0, 0);
+    -fx-opacity: 0.9;
+    -fx-cursor: hand;
+}
+
+/* Title label hover effect */
+.title-label {
+    -fx-transition: -fx-effect 0.3s, -fx-text-fill 0.3s;
+}
+
+.title-label:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.5), 8, 0.5, 0, 0);
+    -fx-text-fill: white;
+}
+
+/* ========== ConfirmPassword.fxml Styles ========== */
+
+/* Password field hover effects */
+.password-field {
+    -fx-transition: -fx-border-color 0.3s, -fx-effect 0.3s, -fx-border-width 0.3s;
+}
+
+.password-field:hover {
+    -fx-cursor: text;
+    -fx-border-color: #00a0ff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.5), 8, 0.5, 0, 0);
+}
+
+.password-field:focused {
+    -fx-border-color: #00a0ff;
+    -fx-border-width: 2.5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.7), 10, 0.6, 0, 0);
+}
+
+
+.confirm-button {
+    -fx-transition: -fx-background-color 0.3s, -fx-scale-x 0.2s, -fx-scale-y 0.2s, -fx-effect 0.3s;
+}
+
+.confirm-button:hover {
+    -fx-background-color: #0078e0;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.8), 15, 0.7, 0, 0);
+}
+
+.confirm-button:pressed {
+    -fx-background-color: #0060b0;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+/* ========== Page Transition Effects ========== */
+
+/* These styles create smooth transitions between pages */
+.root {
+    -fx-transition: opacity 0.4s ease-in-out, -fx-scale-x 0.4s, -fx-scale-y 0.4s;
+}
+
+/* Transition effect when a page is loaded */
+.page-transition {
+    -fx-opacity: 0;
+    -fx-animation: popIn 0.5s ease-out forwards;
+}
+
+/* Keyframe animation for fade-in transition */
+@keyframes fadeIn {
+    from { -fx-opacity: 0; }
+    to { -fx-opacity: 1; }
+}
+
+/* Keyframe animation for pop-up transition */
+@keyframes popIn {
+    0% {
+        -fx-opacity: 0;
+        -fx-scale-x: 0.7;
+        -fx-scale-y: 0.7;
+    }
+    70% {
+        -fx-opacity: 1;
+        -fx-scale-x: 1.05;
+        -fx-scale-y: 1.05;
+    }
+    100% {
+        -fx-opacity: 1;
+        -fx-scale-x: 1;
+        -fx-scale-y: 1;
+    }
+}
+
+/* Apply this to BorderPane to enable transition effects */
+BorderPane, AnchorPane, StackPane {
+    -fx-transition: opacity 0.35s ease-in-out, -fx-scale-x 0.35s, -fx-scale-y 0.35s;
+}
+
+/* Define styles for different transition types */
+.fade-transition {
+    -fx-opacity: 1;
+    -fx-transition: opacity 0.4s ease-in-out;
+}
+
+
+/* Scale transition effect for dramatic entrances */
+.scale-transition {
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition: -fx-scale-x 0.3s ease-out, -fx-scale-y 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+
+/* Pop-up transition for dialogs and modals */
+.popup-transition {
+    -fx-opacity: 1;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-animation: popIn 0.4s ease-out;
+}
+
+/* Make scene transitions smooth with opacity change and scale */
+.scene {
+    -fx-transition: opacity 0.35s ease-in-out, -fx-scale-x 0.35s, -fx-scale-y 0.35s;
+}
+
+/* Dialog popup effect */
+.dialog-popup {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 20, 0.5, 0, 0);
+    -fx-animation: dialogPopIn 0.45s ease-out forwards;
+}
+
+@keyframes dialogPopIn {
+    0% {
+        -fx-opacity: 0;
+        -fx-scale-x: 0.5;
+        -fx-scale-y: 0.5;
+        -fx-translate-y: 50px;
+    }
+    60% {
+        -fx-opacity: 1;
+        -fx-scale-x: 1.08;
+        -fx-scale-y: 1.08;
+        -fx-translate-y: -5px;
+    }
+    80% {
+        -fx-scale-x: 0.98;
+        -fx-scale-y: 0.98;
+        -fx-translate-y: 3px;
+    }
+    100% {
+        -fx-opacity: 1;
+        -fx-scale-x: 1;
+        -fx-scale-y: 1;
+        -fx-translate-y: 0;
+    }
+}
+
+/* Bounce effect for confirmation dialogs */
+.bounce-popup {
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.4), 20, 0.6, 0, 0);
+    -fx-animation: bounceIn 0.6s ease-out forwards;
+}
+
+@keyframes bounceIn {
+    0% {
+        -fx-opacity: 0;
+        -fx-scale-x: 0.3;
+        -fx-scale-y: 0.3;
+    }
+    50% {
+        -fx-opacity: 1;
+        -fx-scale-x: 1.1;
+        -fx-scale-y: 1.1;
+    }
+    70% {
+        -fx-scale-x: 0.95;
+        -fx-scale-y: 0.95;
+    }
+    90% {
+        -fx-scale-x: 1.03;
+        -fx-scale-y: 1.03;
+    }
+    100% {
+        -fx-opacity: 1;
+        -fx-scale-x: 1;
+        -fx-scale-y: 1;
+    }
+}
+
+/* ========== Page Transition Effects ========== */
+
+/* These styles create smooth transitions between pages */
+.root {
+    -fx-transition: opacity 0.4s ease-in-out;
+}
+
+
+.page-transition {
+    -fx-opacity: 0;
+    -fx-animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+
+@keyframes fadeIn {
+    from { -fx-opacity: 0; }
+    to { -fx-opacity: 1; }
+}
+
+
+BorderPane, AnchorPane, StackPane {
+    -fx-transition: opacity 0.35s ease-in-out;
+}
+
+fade-transition {
+    -fx-opacity: 1;
+    -fx-transition: opacity 0.4s ease-in-out;
+}
+
+
+
+
+.scale-transition {
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-transition: -fx-scale-x 0.3s ease-out, -fx-scale-y 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+
+
+
+.scene {
+    -fx-transition: opacity 0.35s ease-in-out;
+}
+.export-button {
+    -fx-background-color: #0066cc;
+}

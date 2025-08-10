@@ -1,0 +1,89 @@
+@startuml Chatbot Sequence
+
+skinparam sequence {
+    ParticipantBackgroundColor LightBlue
+    ActorBackgroundColor LightGreen
+    DatabaseBackgroundColor LightYellow
+}
+
+actor User
+participant "ChatInterface" as CI
+participant "MessageProcessor" as MP
+participant "NLPEngine" as NLP
+participant "IntentClassifier" as IC
+participant "ResponseGenerator" as RG
+database "KnowledgeBase" as KB
+participant "SessionManager" as SM
+
+== Session Initialization ==
+User -> CI: startChat()
+activate CI
+CI -> SM: createSession()
+activate SM
+SM -> KB: loadUserProfile()
+KB --> SM: userProfile
+SM --> CI: sessionCreated
+deactivate SM
+CI --> User: welcomeMessage
+deactivate CI
+
+== Message Processing ==
+User -> CI: sendMessage(text)
+activate CI
+CI -> MP: processMessage(text)
+activate MP
+MP -> NLP: analyzeText(text)
+activate NLP
+NLP -> NLP: tokenization()
+NLP -> NLP: posTagging()
+NLP -> NLP: entityRecognition()
+NLP --> MP: analyzedText
+deactivate NLP
+
+MP -> IC: classifyIntent(analyzedText)
+activate IC
+IC -> KB: matchPatterns()
+KB --> IC: patterns
+IC --> MP: intent
+deactivate IC
+
+MP -> RG: generateResponse(intent)
+activate RG
+RG -> KB: fetchResponse(intent)
+KB --> RG: responseTemplate
+RG -> RG: personalizeResponse()
+RG --> MP: response
+deactivate RG
+
+MP --> CI: processedResponse
+deactivate MP
+CI --> User: displayResponse
+deactivate CI
+
+== Context Management ==
+User -> CI: followUpQuestion()
+activate CI
+CI -> SM: getContext()
+activate SM
+SM -> KB: loadPreviousInteraction()
+KB --> SM: context
+SM --> CI: contextData
+CI -> MP: processWithContext(text, context)
+MP --> CI: contextualResponse
+CI --> User: displayContextualResponse
+deactivate SM
+deactivate CI
+
+== Session End ==
+User -> CI: endChat()
+activate CI
+CI -> SM: saveSession()
+activate SM
+SM -> KB: storeInteractionHistory()
+KB --> SM: saved
+SM --> CI: sessionClosed
+deactivate SM
+CI --> User: goodbyeMessage
+deactivate CI
+
+@enduml 

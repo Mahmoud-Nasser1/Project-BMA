@@ -1,0 +1,51 @@
+@startuml Account Management Use Cases
+
+skinparam actorStyle awesome
+skinparam usecase {
+  BackgroundColor LightSkyBlue
+  BorderColor DarkBlue
+  ArrowColor Blue
+}
+
+title "إدارة الحسابات - Account Management"
+
+actor "العميل" as customer
+actor "موظف البنك" as staff
+actor "نظام البريد" as email
+
+rectangle "إدارة الحسابات - Account Management" {
+  usecase "تسجيل الدخول\nLogin" as UC1
+  usecase "تسجيل جديد\nSign Up" as UC1_1
+  usecase "التحقق من البريد\nVerify Email" as UC1_2
+  usecase "استعادة كلمة المرور\nReset Password" as UC1_3
+  usecase "تغيير إعدادات الحساب\nChange Settings" as UC18
+}
+
+customer --> UC1
+customer --> UC1_1
+customer --> UC1_3
+customer --> UC18
+
+staff --> UC1
+
+email --> UC1_2
+email --> UC1_3
+
+UC1_1 ..> UC1_2 : <<include>>
+UC1_3 ..> UC1 : <<extend>>
+
+note right of UC1
+  يجب تسجيل الدخول للوصول
+  لجميع خدمات النظام
+end note
+
+legend right
+  **إدارة الحسابات**
+  ====
+  - تسجيل الدخول والتسجيل الجديد
+  - التحقق من البريد الإلكتروني
+  - استعادة وتغيير كلمة المرور
+  - إدارة إعدادات الحساب
+endlegend
+
+@enduml 

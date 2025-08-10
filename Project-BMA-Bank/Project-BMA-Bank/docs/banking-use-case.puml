@@ -1,0 +1,113 @@
+@startuml Banking System Use Case
+
+skinparam actorStyle awesome
+skinparam usecase {
+  BackgroundColor LightBlue
+  BorderColor DarkBlue
+  ArrowColor Blue
+}
+
+'Actors
+actor "Customer" as customer
+actor "Bank Staff" as staff
+actor "AI Chatbot" as chatbot
+actor "Email System" as email
+
+'Main Banking Package
+rectangle "Account Management" {
+  usecase "Login" as UC1
+  usecase "Sign Up" as UC1_1
+  usecase "Verify Email" as UC1_2
+  usecase "Reset Password" as UC1_3
+  usecase "Change Account Settings" as UC18
+}
+
+rectangle "Basic Banking Operations" {
+  usecase "View Account Balance" as UC2
+  usecase "Transfer Money" as UC3
+  usecase "Deposit Money" as UC4
+  usecase "Withdraw Money" as UC5
+}
+
+rectangle "Transaction & Payments" {
+  usecase "View Transaction History" as UC6
+  usecase "Make Payments" as UC13
+  usecase "View Transaction Analytics" as UC19
+}
+
+rectangle "Customer Support & Services" {
+  usecase "Access Help Center" as UC15
+  usecase "Chat with AI Assistant" as UC16
+  usecase "View Location Services" as UC17
+}
+
+rectangle "Staff Operations" {
+  usecase "Manage Customer Accounts" as UC7
+  usecase "Process Transactions" as UC8
+  usecase "Generate Reports" as UC9
+  usecase "Monitor Account Activities" as UC20
+  usecase "Handle Customer Support" as UC21
+}
+
+'Customer to Account Management
+customer --> UC1
+customer --> UC1_1
+customer --> UC1_3
+customer --> UC18
+
+'Customer to Basic Operations
+customer --> UC2
+customer --> UC3
+customer --> UC4
+customer --> UC5
+
+'Customer to Transactions
+customer --> UC6
+customer --> UC13
+customer --> UC19
+
+'Customer to Support
+customer --> UC15
+customer --> UC16
+customer --> UC17
+
+'Staff Relationships
+staff --> UC1
+staff --> UC7
+staff --> UC8
+staff --> UC9
+staff --> UC20
+staff --> UC21
+
+'Support Systems
+chatbot --> UC16
+chatbot --> UC15
+email --> UC1_2
+email --> UC1_3
+
+'Dependencies
+UC1_1 ..> UC1_2 : <<include>>
+UC3 ..> UC2 : <<include>>
+UC4 ..> UC2 : <<include>>
+UC5 ..> UC2 : <<include>>
+UC8 ..> UC7 : <<include>>
+UC13 ..> UC2 : <<include>>
+UC19 ..> UC6 : <<include>>
+UC1_3 ..> UC1 : <<extend>>
+UC16 ..> UC15 : <<extend>>
+UC20 ..> UC9 : <<include>>
+
+note "جميع العمليات المالية\nتتطلب تسجيل الدخول" as N1
+N1 .. UC1
+
+legend right
+  **تقسيم النظام المصرفي**
+  ====
+  **إدارة الحسابات**: تسجيل الدخول والتسجيل وإعدادات الحساب
+  **العمليات المصرفية الأساسية**: الإيداع والسحب والتحويل
+  **المعاملات والمدفوعات**: سجل المعاملات والتحليلات
+  **خدمة العملاء**: المساعدة والدعم وخدمات الموقع
+  **عمليات الموظفين**: إدارة الحسابات والمعاملات والتقارير
+endlegend
+
+@enduml 

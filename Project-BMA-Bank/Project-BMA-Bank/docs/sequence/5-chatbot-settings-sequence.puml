@@ -1,0 +1,111 @@
+@startuml Chatbot Settings Sequence
+
+skinparam sequence {
+    ParticipantBackgroundColor LightBlue
+    ActorBackgroundColor LightGreen
+    DatabaseBackgroundColor LightYellow
+}
+
+actor User
+participant "ChatInterface" as CI
+participant "SettingsManager" as SM
+participant "PreferencesHandler" as PH
+participant "LanguageManager" as LM
+participant "ThemeManager" as TM
+participant "NotificationManager" as NM
+database "UserPreferences" as UP
+participant "ConfigValidator" as CV
+
+== Settings Management ==
+User -> CI: openSettings()
+activate CI
+CI -> SM: loadUserSettings()
+activate SM
+SM -> UP: fetchUserPreferences()
+UP --> SM: currentSettings
+SM --> CI: displaySettings
+deactivate SM
+CI --> User: showSettingsPanel
+deactivate CI
+
+== Language Settings ==
+User -> CI: changeLanguage(newLang)
+activate CI
+CI -> LM: updateLanguage(newLang)
+activate LM
+LM -> CV: validateLanguage(newLang)
+CV --> LM: isValid
+LM -> UP: saveLanguagePreference(newLang)
+UP --> LM: saved
+LM -> LM: loadLanguageResources()
+LM --> CI: languageUpdated
+deactivate LM
+CI --> User: displayInNewLanguage
+deactivate CI
+
+== Theme Customization ==
+User -> CI: updateTheme(theme)
+activate CI
+CI -> TM: setTheme(theme)
+activate TM
+TM -> CV: validateTheme(theme)
+CV --> TM: isValid
+TM -> UP: saveThemePreference(theme)
+UP --> TM: saved
+TM -> TM: applyTheme()
+TM --> CI: themeApplied
+deactivate TM
+CI --> User: displayNewTheme
+deactivate CI
+
+== Notification Preferences ==
+User -> CI: configureNotifications()
+activate CI
+CI -> NM: updateNotificationSettings()
+activate NM
+NM -> PH: getPreferences()
+PH -> UP: fetchNotificationPrefs()
+UP --> PH: currentPrefs
+PH --> NM: preferences
+NM -> NM: validateSettings()
+NM -> UP: saveNotificationSettings()
+UP --> NM: saved
+NM --> CI: notificationConfigured
+deactivate NM
+CI --> User: showConfirmation
+deactivate CI
+
+== Chat Preferences ==
+User -> CI: updateChatPreferences()
+activate CI
+CI -> PH: setChatPreferences()
+activate PH
+PH -> CV: validatePreferences()
+CV --> PH: isValid
+PH -> UP: saveChatPreferences()
+UP --> PH: saved
+PH -> PH: applyPreferences()
+PH --> CI: preferencesUpdated
+deactivate PH
+CI --> User: showUpdatedChat
+deactivate CI
+
+== Reset Settings ==
+User -> CI: resetToDefault()
+activate CI
+CI -> SM: initiateReset()
+activate SM
+SM -> UP: clearUserPreferences()
+UP --> SM: cleared
+SM -> LM: resetLanguage()
+SM -> TM: resetTheme()
+SM -> NM: resetNotifications()
+SM -> PH: resetPreferences()
+SM -> UP: saveDefaultSettings()
+UP --> SM: defaultsSaved
+SM --> CI: resetComplete
+deactivate SM
+CI --> User: showDefaultSettings
+deactivate CI
+
+@enduml 

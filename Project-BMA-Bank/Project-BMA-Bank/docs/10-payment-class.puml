@@ -1,0 +1,150 @@
+@startuml Payment System Class Diagram
+
+skinparam class {
+    BackgroundColor LightGreen
+    ArrowColor Green
+    BorderColor DarkGreen
+}
+
+' Core Payment Classes
+abstract class Payment {
+    #id: int
+    #userId: int
+    #amount: double
+    #date: DateTime
+    #status: String
+    +processPayment(): boolean
+    +validateAmount(): boolean
+    +getPaymentDetails(): String
+    +{abstract} calculateFees(): double
+}
+
+class BillPayment extends Payment {
+    -billType: String
+    -customerId: String
+    +calculateFees(): double
+    +validateBillInfo(): boolean
+}
+
+class MobileTopUp extends Payment {
+    -network: String
+    -mobileNumber: String
+    +calculateFees(): double
+    +validateMobileNumber(): boolean
+}
+
+class InsurancePayment extends Payment {
+    -provider: String
+    -policyNumber: String
+    +calculateFees(): double
+    +validatePolicy(): boolean
+}
+
+class EducationPayment extends Payment {
+    -institution: String
+    -studentId: String
+    +calculateFees(): double
+    +validateStudent(): boolean
+}
+
+class GovernmentPayment extends Payment {
+    -serviceType: String
+    -serviceNumber: String
+    +calculateFees(): double
+    +validateService(): boolean
+}
+
+' Transaction Classes
+abstract class Transaction {
+    #id: int
+    #userId: int
+    #amount: double
+    #date: DateTime
+    #type: TransactionType
+    +recordTransaction(): boolean
+    +getTransactionDetails(): String
+    +{abstract} validateTransaction(): boolean
+}
+
+class DepositTransaction extends Transaction {
+    -fees: double
+    +validateTransaction(): boolean
+    +calculateFees(): double
+}
+
+class WithdrawalTransaction extends Transaction {
+    -atmId: String
+    +validateTransaction(): boolean
+    +checkWithdrawalLimit(): boolean
+}
+
+class TransferTransaction extends Transaction {
+    -recipientId: int
+    -transferType: String
+    +validateTransaction(): boolean
+    +checkTransferLimit(): boolean
+}
+
+' Helper Classes
+class PaymentProcessor {
+    +processBillPayment(): boolean
+    +processMobileTopUp(): boolean
+    +processInsurance(): boolean
+    +processEducation(): boolean
+    +processGovernment(): boolean
+}
+
+class TransactionProcessor {
+    +processDeposit(): boolean
+    +processWithdrawal(): boolean
+    +processTransfer(): boolean
+    +validateBalance(): boolean
+}
+
+class FeeCalculator {
+    +{static} calculateDepositFee(): double
+    +{static} calculateTransferFee(): double
+    +{static} calculateServiceFee(): double
+}
+
+' Enums
+enum PaymentStatus {
+    PENDING
+    PROCESSING
+    COMPLETED
+    FAILED
+    REVERSED
+}
+
+enum TransactionType {
+    DEPOSIT
+    WITHDRAWAL
+    TRANSFER
+    PAYMENT
+    REFUND
+}
+
+' Relationships
+PaymentProcessor --> Payment
+TransactionProcessor --> Transaction
+Payment --> PaymentStatus
+Transaction --> TransactionType
+Payment --> FeeCalculator
+Transaction --> FeeCalculator
+
+note right of Payment
+  Base class for all payment types
+  with common payment processing logic
+end note
+
+note right of Transaction
+  Base class for all transactions
+  with common transaction processing logic
+end note
+
+note right of FeeCalculator
+  Centralized fee calculation
+  for all financial operations
+end note
+
+@enduml 

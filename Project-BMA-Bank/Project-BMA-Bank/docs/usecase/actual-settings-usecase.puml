@@ -1,0 +1,89 @@
+@startuml Actual Settings Use Cases
+
+skinparam usecase {
+    BackgroundColor LightBlue
+    BorderColor DarkBlue
+    ArrowColor Blue
+}
+
+skinparam actor {
+    BackgroundColor LightGreen
+    BorderColor DarkGreen
+}
+
+actor "Bank User" as user
+actor "Database System" as db
+
+rectangle "Settings Management" {
+    usecase "View User Profile" as UC1
+    usecase "Edit Profile Fields" as UC2
+    usecase "Change Profile Picture" as UC3
+    usecase "View Balance" as UC4
+    usecase "Navigate to Home" as UC5
+    usecase "Navigate to Account" as UC6
+    usecase "Navigate to Deposit/Withdraw" as UC7
+    usecase "Navigate to Payment" as UC8
+    usecase "Navigate to Dashboard" as UC9
+    usecase "Navigate to Find Us" as UC10
+    usecase "Navigate to Chat" as UC11
+    usecase "Navigate to Help" as UC12
+    usecase "Logout" as UC13
+    usecase "Save Changes" as UC14
+}
+
+' User interactions
+user --> UC1
+user --> UC2
+user --> UC3
+user --> UC4
+user --> UC5
+user --> UC6
+user --> UC7
+user --> UC8
+user --> UC9
+user --> UC10
+user --> UC11
+user --> UC12
+user --> UC13
+
+' Database interactions
+UC1 <-- db : provides user details
+UC2 --> db : updates user info
+UC3 --> db : stores image path
+UC4 <-- db : provides balance
+
+' Relationships between use cases
+UC2 ..> UC14 : <<include>>
+UC3 ..> UC14 : <<include>>
+
+note right of UC1
+  Displays:
+  - Full Name
+  - Email
+  - Phone
+  - National ID
+  - Balance
+  - Profile Image
+end note
+
+note right of UC2
+  Editable fields:
+  - Full Name
+  - Email
+  - Phone
+  - National ID
+  (Balance is read-only)
+end note
+
+note right of UC3
+  Uses FileChooser
+  to select and update
+  profile image
+end note
+
+note right of UC14
+  Validates and persists
+  changes to database
+end note
+
+@enduml 

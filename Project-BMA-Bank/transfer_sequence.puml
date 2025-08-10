@@ -1,0 +1,19 @@
+@startuml TransferSequence
+
+' Transfer Sequence Diagram
+title Transfer Process - Sequence Diagram
+
+actor User
+participant TransferController
+participant DatabaseBankSystem
+participant Account
+
+User -> TransferController: Initiate transfer
+TransferController -> DatabaseBankSystem: validateAccounts()
+DatabaseBankSystem --> TransferController: accounts valid
+TransferController -> Account: debit source account
+Account -> Account: credit destination account
+TransferController -> DatabaseBankSystem: updateBalances()
+TransferController --> User: Show confirmation
+
+@enduml 

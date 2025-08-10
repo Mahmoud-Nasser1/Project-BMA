@@ -1,0 +1,51 @@
+@startuml Account Management Use Cases
+
+skinparam actorStyle awesome
+skinparam usecase {
+  BackgroundColor LightSkyBlue
+  BorderColor DarkBlue
+  ArrowColor Blue
+}
+
+title "Account Management"
+
+actor "Customer" as customer
+actor "Bank Staff" as staff
+actor "Email System" as email
+
+rectangle "Account Management" {
+  usecase "Login" as UC1
+  usecase "Sign Up" as UC1_1
+  usecase "Verify Email" as UC1_2
+  usecase "Reset Password" as UC1_3
+  usecase "Change Account Settings" as UC18
+}
+
+customer --> UC1
+customer --> UC1_1
+customer --> UC1_3
+customer --> UC18
+
+staff --> UC1
+
+email --> UC1_2
+email --> UC1_3
+
+UC1_1 ..> UC1_2 : <<include>>
+UC1_3 ..> UC1 : <<extend>>
+
+note right of UC1
+  Login required for
+  all system services
+end note
+
+legend right
+  **Account Management**
+  ====
+  - Login and Registration
+  - Email Verification
+  - Password Recovery
+  - Account Settings
+endlegend
+
+@enduml 

@@ -1,0 +1,77 @@
+@startuml Bank System Core Operations
+
+skinparam sequence {
+    ParticipantBackgroundColor LightBlue
+    ActorBackgroundColor LightGreen
+    DatabaseBackgroundColor LightYellow
+}
+
+actor User
+participant "LoginController" as LC
+participant "HomeController" as HC
+participant "ChatBotController" as CBC
+participant "SettingsController" as SC
+participant "UserSession" as US
+database "DatabaseBankSystem" as DB
+
+== تسجيل الدخول ==
+User -> LC: تسجيل الدخول
+activate LC
+LC -> DB: التحقق من البيانات
+DB --> LC: نتيجة التحقق
+LC -> US: إنشاء جلسة
+LC -> HC: الانتقال للصفحة الرئيسية
+deactivate LC
+
+== الصفحة الرئيسية ==
+User -> HC: فتح الصفحة الرئيسية
+activate HC
+HC -> US: الحصول على بيانات المستخدم
+US --> HC: بيانات المستخدم
+HC -> HC: تهيئة الواجهة
+HC --> User: عرض الصفحة الرئيسية
+deactivate HC
+
+== الشات بوت ==
+User -> CBC: فتح الشات
+activate CBC
+CBC -> US: الحصول على اسم المستخدم
+CBC -> DB: جلب تفاصيل المستخدم
+DB --> CBC: تفاصيل المستخدم
+CBC --> User: عرض واجهة الشات
+
+User -> CBC: إرسال سؤال
+CBC -> "OpenAI API": إرسال السؤال
+"OpenAI API" --> CBC: الرد
+CBC --> User: عرض الرد
+deactivate CBC
+
+== الإعدادات ==
+User -> SC: فتح الإعدادات
+activate SC
+SC -> US: الحصول على بيانات المستخدم
+US --> SC: بيانات المستخدم
+SC -> DB: جلب الإعدادات
+DB --> SC: الإعدادات الحالية
+SC --> User: عرض الإعدادات
+
+User -> SC: تحديث البيانات
+SC -> DB: حفظ التغييرات
+DB --> SC: تأكيد الحفظ
+SC --> User: عرض رسالة النجاح
+
+User -> SC: تغيير الصورة الشخصية
+SC -> DB: تحديث الصورة
+DB --> SC: تأكيد التحديث
+SC --> User: عرض الصورة الجديدة
+deactivate SC
+
+== تسجيل الخروج ==
+User -> SC: تسجيل الخروج
+activate SC
+SC -> US: مسح الجلسة
+SC -> LC: العودة لصفحة تسجيل الدخول
+SC --> User: تم تسجيل الخروج
+deactivate SC
+
+@enduml 

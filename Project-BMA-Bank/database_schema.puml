@@ -1,0 +1,37 @@
+@startuml DatabaseSchema
+
+' Database Schema Diagram
+title Database Schema
+
+entity "Users" {
+  * user_id: varchar
+  --
+  * username: varchar
+  * password: varchar
+  * email: varchar
+  created_at: timestamp
+}
+
+entity "Accounts" {
+  * account_id: varchar
+  --
+  * user_id: varchar
+  * balance: decimal
+  * account_type: varchar
+  created_at: timestamp
+}
+
+entity "Transactions" {
+  * transaction_id: varchar
+  --
+  * source_account: varchar
+  * destination_account: varchar
+  * amount: decimal
+  * type: varchar
+  * timestamp: timestamp
+}
+
+Users ||--o{ Accounts
+Accounts ||--o{ Transactions
+
+@enduml 

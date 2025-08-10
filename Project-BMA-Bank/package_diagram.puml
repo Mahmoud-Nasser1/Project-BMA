@@ -1,0 +1,22 @@
+@startuml PackageDiagram
+
+' Package Diagram
+title Banking System - Package Structure
+
+package "com.banking" {
+  [Controllers]
+  [Models]
+  [Database]
+  [Utils]
+}
+
+package "com.example" {
+  [Configuration]
+}
+
+[Controllers] --> [Models]
+[Controllers] --> [Database]
+[Controllers] --> [Utils]
+[Models] --> [Database]
+
+@enduml 

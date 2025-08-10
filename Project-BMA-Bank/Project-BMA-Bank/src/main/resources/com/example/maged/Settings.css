@@ -1,0 +1,48 @@
+/* Settings.css */
+.root {
+    -fx-background-color: transparent;
+}
+
+.text-field {
+    -fx-font-size: 14px;
+    -fx-background-radius: 10px;
+    -fx-background-color: rgba(0, 0, 0, 0.25);
+    -fx-border-color: rgba(0, 191, 255, 0.7);
+    -fx-border-radius: 10px;
+    -fx-border-width: 1.5px;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.7);
+    -fx-padding: 8 12;
+}
+
+.button {
+    -fx-background-color: linear-gradient(to bottom, #00a2ff, #0066cc);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 22px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 140, 255, 0.8), 12, 0, 0, 0);
+}
+
+.button:disabled {
+    -fx-opacity: 0.6;
+}
+
+.label {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+.menu-item:hover {
+    -fx-background-color: rgba(200, 200, 200, 0.2);
+    -fx-background-radius: 25;
+    -fx-underline: true;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 8, 0.0, 0, 3);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+.menu-item Label {
+    -fx-font-weight: bold;
+}

@@ -1,0 +1,123 @@
+@startuml Detailed Chatbot and Settings Implementation
+
+skinparam sequence {
+    ParticipantBackgroundColor LightBlue
+    ActorBackgroundColor LightGreen
+    DatabaseBackgroundColor LightYellow
+}
+
+actor User
+participant "ChatBotController" as CBC
+participant "OpenAIChatbot" as OAI
+participant "SettingsController" as SC
+participant "UserSession" as US
+database "DatabaseBankSystem" as DB
+participant "OpenAI API" as API
+
+== تهيئة الشات بوت ==
+User -> CBC: فتح الشات
+activate CBC
+CBC -> US: getInstance()
+US --> CBC: session
+CBC -> US: getUsername()
+US --> CBC: currentUsername
+CBC -> DB: getUserDetails(username)
+DB --> CBC: userDetails
+CBC -> CBC: initialize()
+note right: تهيئة واجهة المستخدم والأزرار
+CBC --> User: عرض واجهة الشات
+deactivate CBC
+
+== التفاعل مع الشات بوت ==
+User -> CBC: handleAskChatbot(question)
+activate CBC
+CBC -> CBC: التحقق من السؤال
+CBC -> CBC: addMessageToChat("You", question)
+
+CBC -> OAI: getChatResponse(initialPrompt)
+activate OAI
+OAI -> API: إرسال الطلب
+API --> OAI: questionType
+OAI --> CBC: نوع السؤال
+deactivate OAI
+
+alt سؤال متعلق بالبنك
+    CBC -> OAI: getChatResponse(dataPrompt)
+    activate OAI
+    OAI -> API: إرسال الطلب
+    API --> OAI: aiResponse
+    OAI --> CBC: نوع العملية المطلوبة
+    deactivate OAI
+
+    alt طلب الرصيد
+        CBC -> DB: getBalance(currentUsername)
+        DB --> CBC: balance
+        CBC -> CBC: addMessageToChat("Assistant", balance)
+    else طلب المعاملات
+        CBC -> DB: getRecentTransactions(currentUsername)
+        DB --> CBC: transactions
+        CBC -> CBC: addMessageToChat("Assistant", transactions)
+    else طلب التحويلات
+        CBC -> DB: getRecentTransfers(currentUsername)
+        DB --> CBC: transfers
+        CBC -> CBC: addMessageToChat("Assistant", transfers)
+    else طلب تحويل أموال
+        CBC -> DB: transfer(from, to, amount)
+        DB --> CBC: success
+        CBC -> CBC: addMessageToChat("Assistant", result)
+    end
+else سؤال عام
+    CBC -> OAI: getChatResponse(generalPrompt)
+    activate OAI
+    OAI -> API: إرسال الطلب
+    API --> OAI: response
+    OAI --> CBC: الرد العام
+    deactivate OAI
+    CBC -> CBC: addMessageToChat("Assistant", response)
+end
+
+CBC --> User: عرض الرد
+deactivate CBC
+
+== تهيئة الإعدادات ==
+User -> SC: فتح الإعدادات
+activate SC
+SC -> US: getInstance()
+US --> SC: session
+SC -> US: getUsername()
+US --> SC: currentUsername
+SC -> DB: getUserDetails(username)
+DB --> SC: userDetails
+SC -> SC: loadUserData()
+note right: تحميل البيانات في النموذج
+SC --> User: عرض الإعدادات
+deactivate SC
+
+== تحديث الإعدادات ==
+User -> SC: enableEditing()
+activate SC
+SC -> SC: تفعيل حقول التحرير
+SC --> User: نموذج قابل للتحرير
+
+User -> SC: تحديث البيانات
+SC -> SC: التحقق من المدخلات
+SC -> DB: updateUserDetails(data)
+DB --> SC: نتيجة التحديث
+SC --> User: رسالة التأكيد
+
+User -> SC: changeProfileImage()
+SC -> SC: فتح منتقي الملفات
+SC -> DB: updateProfileImage(path)
+DB --> SC: نتيجة التحديث
+SC --> User: عرض الصورة الجديدة
+deactivate SC
+
+== تسجيل الخروج ==
+User -> SC: handleLogout()
+activate SC
+SC -> US: clearSession()
+SC -> SC: الانتقال لصفحة تسجيل الدخول
+SC --> User: تم تسجيل الخروج
+deactivate SC
+
+@enduml 

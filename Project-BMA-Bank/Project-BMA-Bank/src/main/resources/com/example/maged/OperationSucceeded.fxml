@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.SVGPath?>
+<?import java.net.URL?>
+
+<AnchorPane prefHeight="400.0" prefWidth="500.0" styleClass="bounce-popup" style="-fx-background-color: rgba(0, 0, 0, 0.7); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 0); -fx-border-color: #008cff; -fx-border-width: 2; -fx-border-radius: 0; -fx-background-radius: 0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.banking.OperationSucceeded">
+    <stylesheets>
+        <URL value="@PaymentStyles.css" />
+    </stylesheets>
+    <children>
+        <StackPane fx:id="animationContainer" layoutX="150.0" layoutY="50.0" prefHeight="150.0" prefWidth="200.0">
+            <children>
+                <Circle fx:id="outerCircle" fill="#008cff19" radius="60.0" stroke="#008cff" strokeWidth="3.0" />
+                <Circle fx:id="middleCircle" fill="#008cff33" radius="45.0" stroke="#008cff" strokeWidth="0.0" />
+                <SVGPath fx:id="checkmark" content="M40,80 L65,105 L110,45" fill="TRANSPARENT" stroke="#ffffff" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="6.0" />
+            </children>
+        </StackPane>
+        <Label layoutX="134.0" layoutY="230.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;" text="Transfer Completed!" />
+        <Button fx:id="ToHome" layoutX="185.0" layoutY="300.0" mnemonicParsing="false" onAction="#Clicking6" prefHeight="43.0" prefWidth="129.0" style="-fx-background-color: #008cff; -fx-background-radius: 45; -fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #f5f4fa;" styleClass="confirm-button" text="To home page" />
+        <Rectangle fx:id="particleContainer" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="150.0" layoutX="150.0" layoutY="50.0" stroke="TRANSPARENT" strokeType="INSIDE" width="200.0" />
+    </children>
+</AnchorPane>

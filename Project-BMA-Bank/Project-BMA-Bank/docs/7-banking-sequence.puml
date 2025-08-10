@@ -1,0 +1,86 @@
+@startuml Banking System Sequence
+
+skinparam sequence {
+    ParticipantBackgroundColor LightBlue
+    ActorBackgroundColor LightGreen
+    DatabaseBackgroundColor LightYellow
+    ArrowColor Blue
+}
+
+actor User
+participant "GUI\nInterface" as GUI
+participant "Account\nManager" as Account
+participant "Transaction\nProcessor" as Trans
+participant "Payment\nHandler" as Payment
+participant "Security\nManager" as Security
+database "Database" as DB
+participant "Email\nSystem" as Email
+
+== Authentication ==
+User -> GUI: Login Request
+GUI -> Security: Verify Credentials
+Security -> DB: Check User Data
+DB --> Security: Return User Info
+Security --> GUI: Authentication Result
+GUI --> User: Display Dashboard
+
+== Account Operations ==
+User -> GUI: View Balance
+GUI -> Account: Request Balance
+Account -> DB: Query Balance
+DB --> Account: Return Balance
+Account --> GUI: Display Balance
+
+== Transaction Processing ==
+User -> GUI: Initiate Transaction
+GUI -> Trans: Process Transaction
+Trans -> Security: Verify Transaction
+Security -> DB: Check Balance
+DB --> Security: Balance Status
+Security --> Trans: Verification Result
+Trans -> DB: Update Balance
+DB --> Trans: Confirmation
+Trans --> GUI: Transaction Status
+GUI --> User: Display Result
+
+== Payment Services ==
+User -> GUI: Request Payment
+GUI -> Payment: Process Payment
+Payment -> Security: Verify Payment
+Security -> DB: Check Account
+DB --> Security: Account Status
+Security --> Payment: Verification
+Payment -> DB: Record Payment
+DB --> Payment: Confirmation
+Payment --> GUI: Payment Status
+GUI --> User: Show Receipt
+
+== Account Management ==
+User -> GUI: Update Profile
+GUI -> Account: Process Update
+Account -> Security: Verify Changes
+Security -> DB: Update Records
+DB --> Security: Update Status
+Security --> Account: Confirmation
+Account --> GUI: Update Result
+GUI --> User: Show Status
+
+== Email Notifications ==
+Trans -> Email: Send Transaction Alert
+Payment -> Email: Send Payment Receipt
+Email --> User: Notification
+
+note right of Security
+  All operations require
+  security verification
+end note
+
+note right of DB
+  Database maintains:
+  - User accounts
+  - Transactions
+  - Payments
+  - Account history
+end note
+
+@enduml 

@@ -1,0 +1,83 @@
+@startuml Settings Use Cases
+
+skinparam usecase {
+    BackgroundColor LightBlue
+    BorderColor DarkBlue
+    ArrowColor Blue
+}
+
+skinparam actor {
+    BackgroundColor LightGreen
+    BorderColor DarkGreen
+}
+
+actor "Bank User" as user
+actor "Database System" as db
+
+rectangle "Settings Management" {
+    usecase "View Profile Settings" as UC1
+    usecase "Edit Personal Information" as UC2
+    usecase "Change Profile Image" as UC3
+    usecase "Update Contact Details" as UC4
+    usecase "View Account Balance" as UC5
+    usecase "Change Password" as UC6
+    usecase "Toggle Theme" as UC7
+    usecase "Manage Notifications" as UC8
+    usecase "View Transaction History" as UC9
+    usecase "Logout" as UC10
+    usecase "Validate User Input" as UC11
+    usecase "Save Settings" as UC12
+}
+
+' User interactions
+user --> UC1
+user --> UC2
+user --> UC3
+user --> UC4
+user --> UC5
+user --> UC6
+user --> UC7
+user --> UC8
+user --> UC9
+user --> UC10
+
+' Database interactions
+UC1 <-- db : provides data
+UC2 --> db : stores data
+UC3 --> db : stores image
+UC4 --> db : updates contact
+UC5 <-- db : provides balance
+UC6 --> db : updates password
+UC9 <-- db : provides history
+
+' Relationships between use cases
+UC2 ..> UC11 : <<include>>
+UC4 ..> UC11 : <<include>>
+UC6 ..> UC11 : <<include>>
+
+UC2 ..> UC12 : <<include>>
+UC3 ..> UC12 : <<include>>
+UC4 ..> UC12 : <<include>>
+UC6 ..> UC12 : <<include>>
+UC7 ..> UC12 : <<include>>
+UC8 ..> UC12 : <<include>>
+
+note right of UC1
+  User can view all their
+  current settings and
+  profile information
+end note
+
+note right of UC11
+  All user inputs are
+  validated before
+  saving to database
+end note
+
+note right of UC12
+  Changes are persisted
+  to database and user
+  session is updated
+end note
+
+@enduml 
